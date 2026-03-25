@@ -3,28 +3,30 @@
 import React from 'react';
 import { Card, CardContent, Typography, Button, Box } from '@mui/material';
 import Link from 'next/link';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 interface ProductCardProps {
   title: string;
   description: string;
   icon: React.ReactNode;
   href: string;
+  variant: 'light' | 'dark';
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ title, description, icon, href }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ title, description, icon, href, variant }) => {
+  const isDark = variant === 'dark';
+
   return (
     <Card
       elevation={0}
       sx={{
         height: '100%',
         borderRadius: 4,
-        border: '1px solid rgba(13, 36, 77, 0.1)',
+        bgcolor: isDark ? '#1a1a1a' : '#fff',
+        color: isDark ? '#fff' : '#0D244D',
         transition: 'all 0.3s ease-in-out',
         '&:hover': {
-          transform: 'translateY(-8px)',
-          boxShadow: '0 12px 30px rgba(13, 36, 77, 0.08)',
-          borderColor: 'secondary.main',
+          transform: 'translateY(-10px)',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.12)',
         },
         display: 'flex',
         flexDirection: 'column',
@@ -33,37 +35,56 @@ const ProductCard: React.FC<ProductCardProps> = ({ title, description, icon, hre
       <CardContent sx={{ p: 4, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <Box
           sx={{
-            width: 60,
-            height: 60,
+            width: 50,
+            height: 50,
             borderRadius: 2,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            bgcolor: 'rgba(210, 170, 81, 0.1)',
-            color: 'secondary.main',
+            bgcolor: isDark ? '#0D244D' : '#0D244D', // Both use blue icon box according to screenshot
+            color: '#fff',
             mb: 3,
           }}
         >
           {icon}
         </Box>
-        <Typography variant="h5" sx={{ fontWeight: 700, mb: 2, color: 'primary.main' }}>
+        <Typography 
+          variant="h5" 
+          sx={{ 
+            fontWeight: 800, 
+            mb: 2, 
+            fontSize: '1.25rem',
+            lineHeight: 1.3
+          }}
+        >
           {title}
         </Typography>
-        <Typography variant="body1" sx={{ color: 'text.secondary', mb: 3, flexGrow: 1 }}>
+        <Typography 
+          variant="body2" 
+          sx={{ 
+            color: isDark ? 'rgba(255,255,255,0.8)' : '#666', 
+            mb: 4, 
+            flexGrow: 1,
+            lineHeight: 1.6
+          }}
+        >
           {description}
         </Typography>
         <Button
           component={Link}
           href={href}
-          endIcon={<ArrowForwardIcon />}
           sx={{
-            color: 'secondary.main',
+            bgcolor: '#d2aa51',
+            color: 'white',
             fontWeight: 700,
-            p: 0,
-            justifyContent: 'flex-start',
+            px: 3,
+            py: 1,
+            borderRadius: 8,
+            fontSize: '0.85rem',
+            textTransform: 'none',
+            alignSelf: 'flex-start',
             '&:hover': {
-              bgcolor: 'transparent',
-              textDecoration: 'underline',
+              bgcolor: '#b89445',
             },
           }}
         >

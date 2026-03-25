@@ -8,6 +8,16 @@ const nextConfig: NextConfig = {
         hostname: 'tndkapital.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.antigravity.dev',
+        pathname: '/**',
+      },
     ],
   },
 };
