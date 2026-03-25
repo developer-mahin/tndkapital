@@ -1,9 +1,14 @@
 'use client';
 
 import { createTheme } from '@mui/material/styles';
-import { Inter } from 'next/font/google';
+import { Inter, Outfit } from 'next/font/google';
 
 const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const outfit = Outfit({
   subsets: ['latin'],
   display: 'swap',
 });
@@ -28,16 +33,19 @@ const theme = createTheme({
   typography: {
     fontFamily: inter.style.fontFamily,
     h1: {
+      fontFamily: outfit.style.fontFamily,
       fontWeight: 700,
       fontSize: '3.5rem',
       lineHeight: 1.2,
     },
     h2: {
+      fontFamily: outfit.style.fontFamily,
       fontWeight: 700,
       fontSize: '2.5rem',
       lineHeight: 1.3,
     },
     h3: {
+      fontFamily: outfit.style.fontFamily,
       fontWeight: 600,
       fontSize: '2rem',
     },

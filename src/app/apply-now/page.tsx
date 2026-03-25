@@ -11,14 +11,16 @@ import {
   MenuItem,
   FormControlLabel,
   Checkbox,
-  Paper,
   Alert,
+  InputAdornment,
 } from '@mui/material';
+import EmailIcon from '@mui/icons-material/Email';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const countries = [
+  { value: 'all', label: 'Guinea, Liberia, Senegal, Sierra Leone' },
   { value: 'guinea', label: 'Guinea' },
   { value: 'liberia', label: 'Liberia' },
   { value: 'senegal', label: 'Senegal' },
@@ -26,13 +28,49 @@ const countries = [
 ];
 
 const productTypes = [
-  { value: 'cpp', label: 'Cost Plus Profit (CPP) Partnership' },
+  { value: 'cpp', label: 'Cost Plus Profit (CPP) - Household' },
   { value: 'ttp', label: 'Trust-Based Trade Partnership (TTP)' },
   { value: 'gep', label: 'Group Empowerment Program (GEP)' },
 ];
 
+const inputStyles = {
+  '& .MuiOutlinedInput-root': {
+    backgroundColor: '#F7F8FA',
+    borderRadius: '4px',
+    '& fieldset': {
+      border: 'none',
+    },
+    '&:hover fieldset': {
+      border: 'none',
+    },
+    '&.Mui-focused fieldset': {
+      border: '2px solid rgba(13, 36, 77, 0.1)',
+    },
+    '& input::placeholder': {
+      color: '#A0AEC0',
+      opacity: 1,
+    },
+    '& .MuiSelect-select': {
+      color: '#A0AEC0',
+    }
+  },
+};
+
 const ApplyNow = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    country: 'all',
+    cityName: '',
+    homeAddress: '',
+    phone: '',
+    email: '',
+    productType: 'cpp',
+    purpose: '',
+    confirmed: false,
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,138 +78,275 @@ const ApplyNow = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  if (submitted) {
+    return (
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <Navbar />
+        <Container maxWidth="md" sx={{ py: 20, flexGrow: 1, textAlign: 'center' }}>
+          <ScrollReveal variant="fade">
+            <Alert severity="success" sx={{ borderRadius: 2, p: 3, fontSize: '1.1rem', mb: 4 }}>
+              Thank you for your application! Our team will review your submission and reach out to you shortly.
+            </Alert>
+            <Button variant="contained" color="primary" href="/" sx={{ borderRadius: 2 }}>
+              Return to Home
+            </Button>
+          </ScrollReveal>
+        </Container>
+        <Footer />
+      </Box>
+    );
+  }
+
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'white' }}>
       <Navbar />
       <main style={{ flexGrow: 1 }}>
-        {/* Header */}
-        <Box sx={{ bgcolor: 'primary.main', color: 'white', pt: { xs: 15, md: 20 }, pb: { xs: 8, md: 12 }, textAlign: 'center' }}>
-          <Container maxWidth="md">
-            <ScrollReveal variant="fade">
-              <Typography variant="h1" sx={{ mb: 3, fontSize: { xs: '2.5rem', md: '4rem' } }}>
-                Apply Now
-              </Typography>
-              <Typography variant="h5" sx={{ opacity: 0.9, fontWeight: 400, lineHeight: 1.6 }}>
-                Apply for an Ethical, Interest-Free Trade Arrangement.
-              </Typography>
-            </ScrollReveal>
-          </Container>
-        </Box>
+        <Container maxWidth="lg" sx={{ pt: { xs: 15, md: 20 }, pb: 10 }}>
+          <ScrollReveal variant="fade">
+            <Typography 
+              variant="h1" 
+              sx={{ 
+                mb: 3, 
+                fontSize: { xs: '2.5rem', md: '3.5rem' }, 
+                color: 'primary.main',
+                fontWeight: 700 
+              }}
+            >
+              Apply for an Ethical, Interest-Free Trade Arrangement
+            </Typography>
+            <Typography 
+              variant="body1" 
+              sx={{ 
+                mb: 8, 
+                maxWidth: '900px', 
+                color: 'text.secondary',
+                fontSize: '1.1rem',
+                lineHeight: 1.8
+              }}
+            >
+              Fill out the form below to request a Sharia-guided trade opportunity with TND Kapital. Once submitted, our team will review it and reach out to guide you through the next steps. Your information is safe with us, and will be used only to process your request.
+            </Typography>
+          </ScrollReveal>
 
-        <Container maxWidth="md" sx={{ py: 10 }}>
-          {submitted ? (
-            <ScrollReveal variant="fade">
-              <Alert severity="success" sx={{ borderRadius: 2, p: 3, fontSize: '1.1rem' }}>
-                Thank you for your application! Our team will review your submission and get back to you shortly.
-              </Alert>
-              <Box sx={{ mt: 4, textAlign: 'center' }}>
-                <Button variant="outlined" color="primary" href="/" sx={{ borderRadius: 2 }}>
-                  Return to Home
-                </Button>
-              </Box>
-            </ScrollReveal>
-          ) : (
-            <ScrollReveal variant="slideUp">
-              <Paper elevation={0} sx={{ p: { xs: 4, md: 8 }, borderRadius: 4, border: '1px solid rgba(13, 36, 77, 0.1)', boxShadow: '0 20px 50px rgba(13, 36, 77, 0.05)' }}>
-                <Typography variant="h4" sx={{ color: 'primary.main', mb: 4, fontWeight: 700 }}>
-                  Personal Information
-                </Typography>
-                <Box component="form" onSubmit={handleSubmit}>
-                  <Grid container spacing={4}>
-                    {/* Name Fields */}
+          <ScrollReveal variant="slideUp">
+            <Box component="form" onSubmit={handleSubmit}>
+              <Grid container spacing={4}>
+                {/* Name Section */}
+                <Grid size={{ xs: 12 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
+                    Name <span style={{ color: '#E53E3E' }}>*</span>
+                  </Typography>
+                  <Grid container spacing={2}>
                     <Grid size={{ xs: 12, sm: 4 }}>
-                      <TextField fullWidth required label="First Name" variant="outlined" />
-                    </Grid>
-                    <Grid size={{ xs: 12, sm: 4 }}>
-                      <TextField fullWidth label="Middle Name" variant="outlined" />
-                    </Grid>
-                    <Grid size={{ xs: 12, sm: 4 }}>
-                      <TextField fullWidth required label="Last Name" variant="outlined" />
-                    </Grid>
-
-                    {/* Location Fields */}
-                    <Grid size={{ xs: 12, sm: 6 }}>
-                      <TextField fullWidth required select label="Select Country" variant="outlined">
-                        {countries.map((option) => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))}
-                      </TextField>
-                    </Grid>
-                    <Grid size={{ xs: 12, sm: 6 }}>
-                      <TextField fullWidth required label="City Name" variant="outlined" />
-                    </Grid>
-                    <Grid size={{ xs: 12 }}>
-                      <TextField fullWidth required label="Home Address" variant="outlined" />
-                    </Grid>
-
-                    {/* Contact Fields */}
-                    <Grid size={{ xs: 12, sm: 6 }}>
-                      <TextField fullWidth required label="WhatsApp Phone Number" placeholder="Country Code + Number" variant="outlined" />
-                    </Grid>
-                    <Grid size={{ xs: 12, sm: 6 }}>
-                      <TextField fullWidth required type="email" label="Email Address" variant="outlined" />
-                    </Grid>
-
-                    {/* Product Selection */}
-                    <Grid size={{ xs: 12 }}>
-                      <Typography variant="h4" sx={{ color: 'primary.main', mt: 4, mb: 4, fontWeight: 700 }}>
-                        Product Details
-                      </Typography>
-                    </Grid>
-                    <Grid size={{ xs: 12 }}>
-                      <TextField fullWidth required select label="Type of Product Requested" variant="outlined">
-                        {productTypes.map((option) => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))}
-                      </TextField>
-                    </Grid>
-                    <Grid size={{ xs: 12 }}>
                       <TextField
                         fullWidth
+                        placeholder="First Name *"
                         required
-                        multiline
-                        rows={4}
-                        label="Purpose of the Asset or Goods Requested"
-                        placeholder="Please provide details about what you need and how it will help your business."
-                        variant="outlined"
+                        sx={inputStyles}
+                        value={formData.firstName}
+                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                       />
                     </Grid>
-
-                    {/* Confirmation */}
-                    <Grid size={{ xs: 12 }}>
-                      <FormControlLabel
-                        required
-                        control={<Checkbox color="secondary" />}
-                        label={
-                          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                            I confirm that the information provided is accurate and I agree to be contacted by the TND Kapital team.
-                          </Typography>
-                        }
-                      />
-                    </Grid>
-
-                    {/* Submit */}
-                    <Grid size={{ xs: 12 }}>
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        color="secondary"
-                        size="large"
+                    <Grid size={{ xs: 12, sm: 4 }}>
+                      <TextField
                         fullWidth
-                        sx={{ py: 2, fontSize: '1.2rem', fontWeight: 700, borderRadius: 2, mt: 2 }}
-                      >
-                        Submit Application
-                      </Button>
+                        placeholder="Middle Name"
+                        sx={inputStyles}
+                        value={formData.middleName}
+                        onChange={(e) => setFormData({ ...formData, middleName: e.target.value })}
+                      />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 4 }}>
+                      <TextField
+                        fullWidth
+                        placeholder="Last Name *"
+                        required
+                        sx={inputStyles}
+                        value={formData.lastName}
+                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                      />
                     </Grid>
                   </Grid>
-                </Box>
-              </Paper>
-            </ScrollReveal>
-          )}
+                </Grid>
+
+                {/* Country Section */}
+                <Grid size={{ xs: 12 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
+                    Select Country <span style={{ color: '#E53E3E' }}>*</span>
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    select
+                    required
+                    sx={inputStyles}
+                    value={formData.country}
+                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                  >
+                    {countries.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+
+                {/* City Section */}
+                <Grid size={{ xs: 12 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
+                    City Name <span style={{ color: '#E53E3E' }}>*</span>
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    placeholder="Type City Name"
+                    required
+                    sx={inputStyles}
+                    value={formData.cityName}
+                    onChange={(e) => setFormData({ ...formData, cityName: e.target.value })}
+                  />
+                </Grid>
+
+                {/* Address Section */}
+                <Grid size={{ xs: 12 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
+                    Home Address <span style={{ color: '#E53E3E' }}>*</span>
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    placeholder="Type Home Address"
+                    required
+                    sx={inputStyles}
+                    value={formData.homeAddress}
+                    onChange={(e) => setFormData({ ...formData, homeAddress: e.target.value })}
+                  />
+                </Grid>
+
+                {/* Phone Section */}
+                <Grid size={{ xs: 12 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
+                    WhatsApp Phone Number <span style={{ color: '#E53E3E' }}>*</span>
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    placeholder="Country Code + Number"
+                    required
+                    sx={inputStyles}
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  />
+                </Grid>
+
+                {/* Email Section */}
+                <Grid size={{ xs: 12 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
+                    Your Email Address <span style={{ color: '#E53E3E' }}>*</span>
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    placeholder="Type Your Email Address"
+                    required
+                    type="email"
+                    sx={inputStyles}
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <EmailIcon sx={{ color: '#4FD1C5' }} />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid>
+
+                {/* Product Section */}
+                <Grid size={{ xs: 12 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
+                    Type of Product Requested <span style={{ color: '#E53E3E' }}>*</span>
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    select
+                    required
+                    sx={inputStyles}
+                    value={formData.productType}
+                    onChange={(e) => setFormData({ ...formData, productType: e.target.value })}
+                  >
+                    {productTypes.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+
+                {/* Purpose Section */}
+                <Grid size={{ xs: 12 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
+                    Describe in detail the Purpose of the Asset of Goods <span style={{ color: '#E53E3E' }}>*</span>
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    multiline
+                    rows={6}
+                    required
+                    sx={inputStyles}
+                    value={formData.purpose}
+                    onChange={(e) => setFormData({ ...formData, purpose: e.target.value })}
+                  />
+                </Grid>
+
+                {/* Checkbox Section */}
+                <Grid size={{ xs: 12 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 2, color: 'text.primary' }}>
+                    Checkboxes
+                  </Typography>
+                  <FormControlLabel
+                    control={
+                      <Checkbox 
+                        required
+                        checked={formData.confirmed}
+                        onChange={(e) => setFormData({ ...formData, confirmed: e.target.checked })}
+                        sx={{ 
+                          color: '#CBD5E0',
+                          '&.Mui-checked': {
+                            color: 'primary.main',
+                          },
+                        }} 
+                      />
+                    }
+                    label={
+                      <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+                        I confirm that the information provided is accurate and agree to be contacted by TND Kapital
+                      </Typography>
+                    }
+                  />
+                </Grid>
+
+                {/* Submit Button */}
+                <Grid size={{ xs: 12 }}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      bgcolor: '#0D244D',
+                      color: 'white',
+                      py: 1.5,
+                      px: 5,
+                      fontSize: '1.1rem',
+                      fontWeight: 700,
+                      borderRadius: 1,
+                      '&:hover': {
+                        bgcolor: '#081A3A',
+                      },
+                      mt: 2
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
+          </ScrollReveal>
         </Container>
       </main>
       <Footer />
@@ -180,3 +355,4 @@ const ApplyNow = () => {
 };
 
 export default ApplyNow;
+

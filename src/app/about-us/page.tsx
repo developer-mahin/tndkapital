@@ -1,14 +1,9 @@
-'use client';
-
 import React from 'react';
-import { Box, Container, Typography, Grid, Stack, Paper } from '@mui/material';
+import { Box, Container, Typography, Grid, Paper, Button } from '@mui/material';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollReveal from '@/components/ScrollReveal';
 import Image from 'next/image';
-import GroupsIcon from '@mui/icons-material/Groups';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import PublicIcon from '@mui/icons-material/Public';
 
 const AboutUs = () => {
   return (
@@ -18,26 +13,72 @@ const AboutUs = () => {
         {/* Hero Section */}
         <Box
           sx={{
-            bgcolor: 'primary.main',
+            position: 'relative',
+            height: '80vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             color: 'white',
-            pt: { xs: 15, md: 20 },
-            pb: { xs: 10, md: 15 },
             textAlign: 'center',
+            overflow: 'hidden',
           }}
         >
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              zIndex: -1,
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              },
+            }}
+          >
+            <Image
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" // Placeholder: Coworking/People
+              alt="Our Story Background"
+              fill
+              style={{ objectFit: 'cover' }}
+              priority
+            />
+          </Box>
           <Container maxWidth="md">
             <ScrollReveal variant="fade">
-              <Typography variant="h1" sx={{ mb: 3, fontSize: { xs: '2.5rem', md: '4rem' } }}>
-                About TND Kapital
+              <Typography 
+                variant="h1" 
+                sx={{ 
+                  fontSize: { xs: '3rem', md: '5rem' }, 
+                  fontWeight: 700,
+                  mb: 2,
+                }}
+              >
+                Our Story
               </Typography>
-              <Typography variant="h5" sx={{ opacity: 0.9, fontWeight: 400, lineHeight: 1.6 }}>
-                Building ethical futures through transparency, integrity, and mutual prosperity.
+              <Typography 
+                variant="h5" 
+                sx={{ 
+                  maxWidth: '700px', 
+                  mx: 'auto', 
+                  lineHeight: 1.6,
+                  fontWeight: 400,
+                  opacity: 0.95
+                }}
+              >
+                Empowering Lives with Innovative Business Solutions. Your Partner in Community Development.
               </Typography>
             </ScrollReveal>
           </Container>
         </Box>
 
-        {/* Narrative Section */}
+        {/* Narrative Section - Building Ethical Futures */}
         <Container maxWidth="lg" sx={{ py: { xs: 10, md: 15 } }}>
           <Grid container spacing={8} alignItems="center">
             <Grid size={{ xs: 12, md: 6 }}>
@@ -45,15 +86,15 @@ const AboutUs = () => {
                 <Box
                   sx={{
                     position: 'relative',
-                    height: { xs: 300, md: 500 },
-                    borderRadius: 4,
+                    height: { xs: 400, md: 600 },
+                    borderRadius: '24px',
                     overflow: 'hidden',
-                    boxShadow: '0 20px 40px rgba(13, 36, 77, 0.1)',
+                    boxShadow: '0 30px 60px rgba(0,0,0,0.12)',
                   }}
                 >
                   <Image
-                    src="https://tndkapital.com/wp-content/uploads/2025/10/3FC51717-F9FA-42DF-80B8-7369B708E479.png"
-                    alt="About TND Kapital"
+                    src="https://images.unsplash.com/photo-1573164067505-19a2ef4ecf5c?q=80&w=1974&auto=format&fit=crop" // Placeholder: Handshake/Trust
+                    alt="Building Ethical Futures"
                     fill
                     style={{ objectFit: 'cover' }}
                   />
@@ -62,61 +103,237 @@ const AboutUs = () => {
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
               <ScrollReveal variant="slideLeft">
-                <Typography variant="overline" sx={{ color: 'secondary.main', fontWeight: 700, letterSpacing: 2 }}>
-                  Our Story
+                <Typography 
+                  variant="overline" 
+                  sx={{ 
+                    color: 'primary.main', 
+                    fontWeight: 700, 
+                    letterSpacing: 2,
+                    fontSize: '0.9rem',
+                    mb: 2,
+                    display: 'block'
+                  }}
+                >
+                  WHAT WE DO
                 </Typography>
-                <Typography variant="h2" sx={{ color: 'primary.main', mb: 4, mt: 1 }}>
-                  Ethical Trade for a Better World
+                <Typography 
+                  variant="h2" 
+                  sx={{ 
+                    color: 'primary.main', 
+                    mb: 3, 
+                    fontWeight: 700,
+                    fontSize: { xs: '2.5rem', md: '3.5rem' },
+                    lineHeight: 1.1
+                  }}
+                >
+                  Building Ethical Futures, Together
                 </Typography>
-                <Typography variant="body1" sx={{ color: 'text.secondary', mb: 3, fontSize: '1.1rem', lineHeight: 1.8 }}>
-                  TND Kapital was born out of a desire to create a financial ecosystem that prioritizes people over profits and ethics over interest. We believe that trade is a powerful tool for community empowerment and shared success.
+                <Box 
+                  sx={{ 
+                    pl: 3, 
+                    borderLeft: '4px solid', 
+                    borderColor: 'primary.main',
+                    mb: 4
+                  }}
+                >
+                    <Typography 
+                    variant="body1" 
+                    sx={{ 
+                      fontStyle: 'italic', 
+                      fontSize: '1.25rem', 
+                      color: 'text.secondary',
+                      lineHeight: 1.5
+                    }}
+                  >
+                    &quot;We don&apos;t just support aspirations — we stand with those who pursue them.&quot; — TND Kapital.
+                  </Typography>
+                </Box>
+                <Typography 
+                  variant="body1" 
+                  sx={{ 
+                    color: 'text.secondary', 
+                    mb: 5, 
+                    fontSize: '1.1rem', 
+                    lineHeight: 1.8 
+                  }}
+                >
+                  TND Kapital is a mission-driven company inspired by Islamic ethics and committed to community development. We provide practical, interest-free solutions that support everyday goals — helping people grow with confidence, fairness, and integrity.
                 </Typography>
-                <Typography variant="body1" sx={{ color: 'text.secondary', fontSize: '1.1rem', lineHeight: 1.8 }}>
-                  Inspired by the principles of Islamic finance and universal ethical standards, we provide solutions that are interest-free, transparent, and focused on real-world assets. Our journey is about more than just numbers; it’s about building lasting legacies and fostering a culture of mutual trust.
-                </Typography>
+                <Button 
+                  variant="contained" 
+                  sx={{ 
+                    bgcolor: '#0C2752', 
+                    color: 'white', 
+                    px: 5, 
+                    py: 1.5,
+                    borderRadius: '30px',
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    textTransform: 'none',
+                    '&:hover': {
+                      bgcolor: '#081a38'
+                    }
+                  }}
+                >
+                  Discover more
+                </Button>
               </ScrollReveal>
             </Grid>
           </Grid>
         </Container>
 
-        {/* Vision & Mission */}
-        <Box sx={{ bgcolor: 'rgba(13, 36, 77, 0.03)', py: { xs: 10, md: 15 } }}>
+        {/* Trusted Grid Section */}
+        <Box sx={{ py: { xs: 10, md: 15 }, bgcolor: 'white' }}>
           <Container maxWidth="lg">
+            <Typography 
+              variant="h3" 
+              textAlign="center" 
+              sx={{ 
+                color: '#0C2752', 
+                mb: 8, 
+                fontWeight: 700,
+                fontSize: { xs: '2rem', md: '3rem' }
+              }}
+            >
+              Trusted, Transparent, and Innovative.
+            </Typography>
             <Grid container spacing={4}>
-              <Grid size={{ xs: 12, md: 4 }}>
-                <ScrollReveal variant="zoomIn" delay={0.1}>
-                  <Paper elevation={0} sx={{ p: 5, textAlign: 'center', height: '100%', borderRadius: 4 }}>
-                    <Box sx={{ color: 'secondary.main', mb: 3 }}><VisibilityIcon fontSize="large" /></Box>
-                    <Typography variant="h4" sx={{ color: 'primary.main', mb: 2, fontWeight: 700 }}>Our Vision</Typography>
-                    <Typography variant="body1" sx={{ color: 'text.secondary', lineHeight: 1.8 }}>
-                      To be the leading global partner for ethical, interest-free financial solutions that empower every entrepreneur to reach their full potential.
-                    </Typography>
-                  </Paper>
-                </ScrollReveal>
-              </Grid>
-              <Grid size={{ xs: 12, md: 4 }}>
-                <ScrollReveal variant="zoomIn" delay={0.3}>
-                  <Paper elevation={0} sx={{ p: 5, textAlign: 'center', height: '100%', borderRadius: 4 }}>
-                    <Box sx={{ color: 'secondary.main', mb: 3 }}><GroupsIcon fontSize="large" /></Box>
-                    <Typography variant="h4" sx={{ color: 'primary.main', mb: 2, fontWeight: 700 }}>Our Mission</Typography>
-                    <Typography variant="body1" sx={{ color: 'text.secondary', lineHeight: 1.8 }}>
-                      To provide transparent, accessible, and faith-aligned partnership models that foster community growth and sustainable development.
-                    </Typography>
-                  </Paper>
-                </ScrollReveal>
-              </Grid>
-              <Grid size={{ xs: 12, md: 4 }}>
-                <ScrollReveal variant="zoomIn" delay={0.5}>
-                  <Paper elevation={0} sx={{ p: 5, textAlign: 'center', height: '100%', borderRadius: 4 }}>
-                    <Box sx={{ color: 'secondary.main', mb: 3 }}><PublicIcon fontSize="large" /></Box>
-                    <Typography variant="h4" sx={{ color: 'primary.main', mb: 2, fontWeight: 700 }}>Global Impact</Typography>
-                    <Typography variant="body1" sx={{ color: 'text.secondary', lineHeight: 1.8 }}>
-                      Creating a footprint of ethical excellence across borders, ensuring that prosperity is shared and trade is always conducted with integrity.
-                    </Typography>
-                  </Paper>
-                </ScrollReveal>
-              </Grid>
+              {[
+                {
+                  title: "Rooted in Values. Built for People.",
+                  description: "TND Kapital was founded on the bold belief that everyone deserves dignified access to tools that can improve their lives — without interest, exploitation, or pressure. We're not a bank. We're not a traditional lender. We're a value-driven company offering trade-based solutions that honor faith, family, and community.\n\nWhat began as a personal mission is now evolving into a movement of empowerment — one home, one business, one community at a time."
+                },
+                {
+                  title: "Inclusive By Design.",
+                  description: "At TND Kapital, we serve everyone with dignity and fairness — regardless of religion.\n\nWhether Muslim or non-Muslim, if your request meets our criteria and supports ethical, halal business or trade, you're welcome.\n\nWe believe values matter more than labels — and dignity belongs to all."
+                },
+                {
+                  title: "Our Future Is Collective.",
+                  description: "This is just the beginning. We're building something meaningful — and we believe in doing it the right way, even if that means growing slow and strong. If you believe in empowerment through trust and community — you're in the right place. Join Us."
+                }
+              ].map((card, index) => (
+                <Grid size={{ xs: 12, md: 4 }} key={index}>
+                  <ScrollReveal variant="zoomIn" delay={index * 0.2}>
+                    <Paper 
+                      elevation={0} 
+                      sx={{ 
+                        p: 6, 
+                        height: '100%', 
+                        bgcolor: '#0C2752', 
+                        color: 'white',
+                        borderRadius: '20px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        textAlign: 'center'
+                      }}
+                    >
+                      <Box sx={{ mb: 4, width: '100px', height: '40px', position: 'relative' }}>
+                         <Image
+                            src="https://tndkapital.com/wp-content/uploads/2025/05/Untitled-design-70.png"
+                            alt="TND Kapital"
+                            fill
+                            style={{ objectFit: 'contain', filter: 'brightness(0) invert(1) sepia(1) saturate(1000%) hue-rotate(0deg)' }} // Making it look "gold" via filter if needed, but since it's white/gold naturally it might work.
+                          />
+                      </Box>
+                      <Typography variant="h5" sx={{ mb: 3, fontWeight: 700, lineHeight: 1.2 }}>
+                        {card.title}
+                      </Typography>
+                      <Typography variant="body2" sx={{ opacity: 0.9, lineHeight: 1.8, whiteSpace: 'pre-line' }}>
+                        {card.description}
+                      </Typography>
+                    </Paper>
+                  </ScrollReveal>
+                </Grid>
+              ))}
             </Grid>
+          </Container>
+        </Box>
+
+        {/* CTA Section */}
+        <Box
+          sx={{
+            position: 'relative',
+            py: { xs: 15, md: 25 },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+            textAlign: 'center',
+            overflow: 'hidden',
+          }}
+        >
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              zIndex: -1,
+            }}
+          >
+            <Image
+              src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=2070&auto=format&fit=crop" // Placeholder: Family/Happy
+              alt="CTA Background"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </Box>
+          <Container maxWidth="md">
+            <ScrollReveal variant="zoomIn">
+              <Paper
+                elevation={0}
+                sx={{
+                  bgcolor: 'rgba(12, 39, 82, 0.85)',
+                  backdropFilter: 'blur(10px)',
+                  p: { xs: 4, md: 8 },
+                  borderRadius: '30px',
+                  color: 'white',
+                }}
+              >
+                <Typography 
+                  variant="h3" 
+                  sx={{ 
+                    mb: 3, 
+                    fontWeight: 700,
+                    fontSize: { xs: '2rem', md: '3.5rem' }
+                  }}
+                >
+                  Empowering Ethical Growth, One Family at a Time
+                </Typography>
+                <Typography 
+                  variant="body1" 
+                  sx={{ 
+                    mb: 5, 
+                    fontSize: '1.1rem', 
+                    opacity: 0.9,
+                    maxWidth: '600px',
+                    mx: 'auto'
+                  }}
+                >
+                  At TND Kapital, we go beyond transactions — we walk with you on a path toward dignity and self-reliance. Our values-based approach, grounded in Islamic principles, offers interest-free solutions built on trust, clarity, and community-focused support.
+                </Typography>
+                <Button 
+                  variant="contained" 
+                  sx={{ 
+                    bgcolor: 'white', 
+                    color: '#0C2752', 
+                    px: 6, 
+                    py: 2,
+                    borderRadius: '40px',
+                    fontSize: '1.1rem',
+                    fontWeight: 700,
+                    textTransform: 'none',
+                    '&:hover': {
+                      bgcolor: '#f5f5f5'
+                    }
+                  }}
+                >
+                  Get Started!
+                </Button>
+              </Paper>
+            </ScrollReveal>
           </Container>
         </Box>
       </main>

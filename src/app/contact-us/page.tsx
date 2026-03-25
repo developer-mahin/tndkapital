@@ -15,31 +15,51 @@ const ContactPage = () => {
         {/* Hero Section */}
         <Box
           sx={{
-            bgcolor: 'primary.main',
+            position: 'relative',
+            height: '400px',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             color: 'white',
-            pt: { xs: 15, md: 20 },
-            pb: { xs: 10, md: 15 },
-            textAlign: 'center',
+            backgroundImage: 'url(/images/contact-hero.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(rgba(13, 36, 77, 0.8), rgba(13, 36, 77, 0.6))',
+              zIndex: 1,
+            },
           }}
         >
-          <Container maxWidth="md">
+          <Container maxWidth="md" sx={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
             <ScrollReveal variant="fade">
-              <Typography variant="h1" sx={{ mb: 3, fontSize: { xs: '2.5rem', md: '4rem' } }}>
-                Get In Touch
+              <Typography 
+                variant="h1" 
+                sx={{ 
+                  mb: 2, 
+                  fontSize: { xs: '2.5rem', md: '3.5rem' },
+                  fontWeight: 700 
+                }}
+              >
+                Contact Us
               </Typography>
-              <Typography variant="h5" sx={{ opacity: 0.9, fontWeight: 400, lineHeight: 1.6 }}>
-                Have questions or ready to start your ethical partnership? We&apos;re here to help.
+              <Typography variant="h6" sx={{ opacity: 0.9, fontWeight: 400, maxWidth: '600px', mx: 'auto' }}>
+                Our team is ready to answer your questions & offer support.
               </Typography>
             </ScrollReveal>
           </Container>
         </Box>
 
-        {/* Contact Form Section */}
-        <Box sx={{ py: { xs: 8, md: 12 } }}>
+        {/* Main Content Section */}
+        <Box sx={{ py: { xs: 8, md: 10 } }}>
           <Container maxWidth="lg">
-            <ScrollReveal variant="slideUp">
-              <ContactUs />
-            </ScrollReveal>
+            <ContactUs />
           </Container>
         </Box>
       </main>
