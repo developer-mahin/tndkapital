@@ -1,93 +1,194 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import ScrollReveal from "@/components/ScrollReveal";
+import EmailIcon from "@mui/icons-material/Email";
 import {
-  Box,
-  Container,
-  Typography,
-  TextField,
-  Button,
-  Grid,
-  MenuItem,
-  FormControlLabel,
-  Checkbox,
   Alert,
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  Grid,
   InputAdornment,
-} from '@mui/material';
-import EmailIcon from '@mui/icons-material/Email';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import ScrollReveal from '@/components/ScrollReveal';
+  MenuItem,
+  Snackbar,
+  TextField,
+  Typography,
+} from "@mui/material";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
-const countries = [
-  { value: 'all', label: 'Guinea, Liberia, Senegal, Sierra Leone' },
-  { value: 'guinea', label: 'Guinea' },
-  { value: 'liberia', label: 'Liberia' },
-  { value: 'senegal', label: 'Senegal' },
-  { value: 'sierra-leone', label: 'Sierra Leone' },
+interface Hub {
+  _id: string;
+  locationName: string;
+}
+
+const countries: { label: string; value: string }[] = [
+  { label: "United States", value: "USD" },
+  { label: "Eurozone", value: "EUR" },
+  { label: "Bangladesh", value: "BDT" },
+  { label: "South Africa", value: "ZAR" },
+  { label: "West Africa (CFA)", value: "XOF" },
+  { label: "Guinea", value: "GNF" },
+  { label: "Liberia", value: "LRD" },
 ];
 
 const productTypes = [
-  { value: 'cpp', label: 'Cost Plus Profit (CPP) - Household' },
-  { value: 'ttp', label: 'Trust-Based Trade Partnership (TTP)' },
-  { value: 'gep', label: 'Group Empowerment Program (GEP)' },
+  { value: "cpp", label: "Cost Plus Profit (CPP) - Household" },
+  { value: "ttp", label: "Trust-Based Trade Partnership (TTP)" },
+  { value: "gep", label: "Group Empowerment Program (GEP)" },
 ];
 
 const inputStyles = {
-  '& .MuiOutlinedInput-root': {
-    backgroundColor: '#F7F8FA',
-    borderRadius: '4px',
-    '& fieldset': {
-      border: 'none',
+  "& .MuiOutlinedInput-root": {
+    backgroundColor: "#F7F8FA",
+    borderRadius: "4px",
+    "& fieldset": {
+      border: "none",
     },
-    '&:hover fieldset': {
-      border: 'none',
+    "&:hover fieldset": {
+      border: "none",
     },
-    '&.Mui-focused fieldset': {
-      border: '2px solid rgba(13, 36, 77, 0.1)',
+    "&.Mui-focused fieldset": {
+      border: "2px solid rgba(13, 36, 77, 0.1)",
     },
-    '& input::placeholder': {
-      color: '#A0AEC0',
+    "& input::placeholder": {
+      color: "#A0AEC0",
       opacity: 1,
     },
-    '& .MuiSelect-select': {
-      color: '#A0AEC0',
-    }
+    "& .MuiSelect-select": {
+      color: "#A0AEC0",
+    },
   },
 };
 
 const ApplyNow = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    country: 'all',
-    cityName: '',
-    homeAddress: '',
-    phone: '',
-    email: '',
-    productType: 'cpp',
-    purpose: '',
+  const [submitted, setSubmitted] = useState<boolean>(false);
+  const [country, setCountry] = useState<string>("");
+  const [formData, setFormData] = useState<{
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    country: string;
+    cityName: string;
+    homeAddress: string;
+    phone: string;
+    email: string;
+    productType: string;
+    hub: string;
+    purpose: string;
+    confirmed: boolean;
+  }>({
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    country: "",
+    cityName: "",
+    homeAddress: "",
+    phone: "",
+    email: "",
+    productType: "cpp",
+    hub: "",
+    purpose: "",
     confirmed: false,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [hubs, setHubs] = useState<Hub[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    const loadHubs = async () => {
+      if (formData.country && formData.country !== "all") {
+        try {
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/location_profile/currency/${formData.country}`,
+          );
+          if (active && res.data.success) {
+            setHubs(res.data.data);
+          }
+        } catch (error) {
+          console.error("Error fetching hubs:", error);
+        }
+      } else {
+        if (active) {
+          // Use timeout to avoid synchronous setState warning
+          setTimeout(() => setHubs([]), 0);
+        }
+      }
+    };
+    loadHubs();
+    return () => {
+      active = false;
+    };
+  }, [formData.country]);
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [snackbar, setSnackbar] = useState<{
+    open: boolean;
+    message: string;
+    severity: "success" | "error";
+  }>({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setLoading(true);
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/leads_and_clients/from_website`,
+        formData,
+      );
+      if (res.data.success) {
+        setSubmitted(true);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error("Error submitting form:", error);
+      setSnackbar({
+        open: true,
+        message: error.response?.data?.message || "Something went wrong. Please try again.",
+        severity: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbar({ ...snackbar, open: false });
   };
 
   if (submitted) {
     return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Box
+        sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      >
         <Navbar />
-        <Container maxWidth="md" sx={{ py: 20, flexGrow: 1, textAlign: 'center' }}>
+        <Container
+          maxWidth="md"
+          sx={{ py: 20, flexGrow: 1, textAlign: "center" }}
+        >
           <ScrollReveal variant="fade">
-            <Alert severity="success" sx={{ borderRadius: 2, p: 3, fontSize: '1.1rem', mb: 4 }}>
-              Thank you for your application! Our team will review your submission and reach out to you shortly.
+            <Alert
+              severity="success"
+              sx={{ borderRadius: 2, p: 3, fontSize: "1.1rem", mb: 4 }}
+            >
+              Thank you for your application! Our team will review your
+              submission and reach out to you shortly.
             </Alert>
-            <Button variant="contained" color="primary" href="/" sx={{ borderRadius: 2 }}>
+            <Button
+              variant="contained"
+              color="primary"
+              href="/"
+              sx={{ borderRadius: 2 }}
+            >
               Return to Home
             </Button>
           </ScrollReveal>
@@ -98,33 +199,58 @@ const ApplyNow = () => {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'white' }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        bgcolor: "white",
+      }}
+    >
       <Navbar />
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
       <main style={{ flexGrow: 1 }}>
         <Container maxWidth="lg" sx={{ pt: { xs: 15, md: 20 }, pb: 10 }}>
           <ScrollReveal variant="fade">
-            <Typography 
-              variant="h1" 
-              sx={{ 
-                mb: 3, 
-                fontSize: { xs: '2.5rem', md: '3.5rem' }, 
-                color: 'primary.main',
-                fontWeight: 700 
+            <Typography
+              variant="h1"
+              sx={{
+                mb: 3,
+                fontSize: { xs: "2.5rem", md: "3.5rem" },
+                color: "primary.main",
+                fontWeight: 700,
               }}
             >
               Apply for an Ethical, Interest-Free Trade Arrangement
             </Typography>
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                mb: 8, 
-                maxWidth: '900px', 
-                color: 'text.secondary',
-                fontSize: '1.1rem',
-                lineHeight: 1.8
+            <Typography
+              variant="body1"
+              sx={{
+                mb: 8,
+                maxWidth: "900px",
+                color: "text.secondary",
+                fontSize: "1.1rem",
+                lineHeight: 1.8,
               }}
             >
-              Fill out the form below to request a Sharia-guided trade opportunity with TND Kapital. Once submitted, our team will review it and reach out to guide you through the next steps. Your information is safe with us, and will be used only to process your request.
+              Fill out the form below to request a Sharia-guided trade
+              opportunity with TND Kapital. Once submitted, our team will review
+              it and reach out to guide you through the next steps. Your
+              information is safe with us, and will be used only to process your
+              request.
             </Typography>
           </ScrollReveal>
 
@@ -133,8 +259,11 @@ const ApplyNow = () => {
               <Grid container spacing={4}>
                 {/* Name Section */}
                 <Grid size={{ xs: 12 }}>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
-                    Name <span style={{ color: '#E53E3E' }}>*</span>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
+                  >
+                    Name <span style={{ color: "#E53E3E" }}>*</span>
                   </Typography>
                   <Grid container spacing={2}>
                     <Grid size={{ xs: 12, sm: 4 }}>
@@ -144,7 +273,12 @@ const ApplyNow = () => {
                         required
                         sx={inputStyles}
                         value={formData.firstName}
-                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            firstName: e.target.value,
+                          })
+                        }
                       />
                     </Grid>
                     <Grid size={{ xs: 12, sm: 4 }}>
@@ -153,7 +287,12 @@ const ApplyNow = () => {
                         placeholder="Middle Name"
                         sx={inputStyles}
                         value={formData.middleName}
-                        onChange={(e) => setFormData({ ...formData, middleName: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            middleName: e.target.value,
+                          })
+                        }
                       />
                     </Grid>
                     <Grid size={{ xs: 12, sm: 4 }}>
@@ -163,7 +302,9 @@ const ApplyNow = () => {
                         required
                         sx={inputStyles}
                         value={formData.lastName}
-                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, lastName: e.target.value })
+                        }
                       />
                     </Grid>
                   </Grid>
@@ -171,8 +312,11 @@ const ApplyNow = () => {
 
                 {/* Country Section */}
                 <Grid size={{ xs: 12 }}>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
-                    Select Country <span style={{ color: '#E53E3E' }}>*</span>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
+                  >
+                    Select Country <span style={{ color: "#E53E3E" }}>*</span>
                   </Typography>
                   <TextField
                     fullWidth
@@ -180,7 +324,9 @@ const ApplyNow = () => {
                     required
                     sx={inputStyles}
                     value={formData.country}
-                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, country: e.target.value })
+                    }
                   >
                     {countries.map((option) => (
                       <MenuItem key={option.value} value={option.value}>
@@ -190,10 +336,39 @@ const ApplyNow = () => {
                   </TextField>
                 </Grid>
 
+                <Grid size={{ xs: 12 }}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
+                  >
+                    Select Hub <span style={{ color: "#E53E3E" }}>*</span>
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    select
+                    required
+                    disabled={hubs?.length === 0}
+                    sx={inputStyles}
+                    value={formData.hub}
+                    onChange={(e) =>
+                      setFormData({ ...formData, hub: e.target.value })
+                    }
+                  >
+                    {hubs.map((hub) => (
+                      <MenuItem key={hub._id} value={hub._id}>
+                        {hub.locationName}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+
                 {/* City Section */}
                 <Grid size={{ xs: 12 }}>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
-                    City Name <span style={{ color: '#E53E3E' }}>*</span>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
+                  >
+                    City Name <span style={{ color: "#E53E3E" }}>*</span>
                   </Typography>
                   <TextField
                     fullWidth
@@ -201,14 +376,19 @@ const ApplyNow = () => {
                     required
                     sx={inputStyles}
                     value={formData.cityName}
-                    onChange={(e) => setFormData({ ...formData, cityName: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, cityName: e.target.value })
+                    }
                   />
                 </Grid>
 
                 {/* Address Section */}
                 <Grid size={{ xs: 12 }}>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
-                    Home Address <span style={{ color: '#E53E3E' }}>*</span>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
+                  >
+                    Home Address <span style={{ color: "#E53E3E" }}>*</span>
                   </Typography>
                   <TextField
                     fullWidth
@@ -216,14 +396,20 @@ const ApplyNow = () => {
                     required
                     sx={inputStyles}
                     value={formData.homeAddress}
-                    onChange={(e) => setFormData({ ...formData, homeAddress: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, homeAddress: e.target.value })
+                    }
                   />
                 </Grid>
 
                 {/* Phone Section */}
                 <Grid size={{ xs: 12 }}>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
-                    WhatsApp Phone Number <span style={{ color: '#E53E3E' }}>*</span>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
+                  >
+                    WhatsApp Phone Number{" "}
+                    <span style={{ color: "#E53E3E" }}>*</span>
                   </Typography>
                   <TextField
                     fullWidth
@@ -231,14 +417,20 @@ const ApplyNow = () => {
                     required
                     sx={inputStyles}
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
                   />
                 </Grid>
 
                 {/* Email Section */}
                 <Grid size={{ xs: 12 }}>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
-                    Your Email Address <span style={{ color: '#E53E3E' }}>*</span>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
+                  >
+                    Your Email Address{" "}
+                    <span style={{ color: "#E53E3E" }}>*</span>
                   </Typography>
                   <TextField
                     fullWidth
@@ -247,11 +439,13 @@ const ApplyNow = () => {
                     type="email"
                     sx={inputStyles}
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
-                          <EmailIcon sx={{ color: '#4FD1C5' }} />
+                          <EmailIcon sx={{ color: "#4FD1C5" }} />
                         </InputAdornment>
                       ),
                     }}
@@ -260,8 +454,12 @@ const ApplyNow = () => {
 
                 {/* Product Section */}
                 <Grid size={{ xs: 12 }}>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
-                    Type of Product Requested <span style={{ color: '#E53E3E' }}>*</span>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
+                  >
+                    Type of Product Requested{" "}
+                    <span style={{ color: "#E53E3E" }}>*</span>
                   </Typography>
                   <TextField
                     fullWidth
@@ -269,7 +467,9 @@ const ApplyNow = () => {
                     required
                     sx={inputStyles}
                     value={formData.productType}
-                    onChange={(e) => setFormData({ ...formData, productType: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, productType: e.target.value })
+                    }
                   >
                     {productTypes.map((option) => (
                       <MenuItem key={option.value} value={option.value}>
@@ -281,8 +481,12 @@ const ApplyNow = () => {
 
                 {/* Purpose Section */}
                 <Grid size={{ xs: 12 }}>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
-                    Describe in detail the Purpose of the Asset of Goods <span style={{ color: '#E53E3E' }}>*</span>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
+                  >
+                    Describe in detail the Purpose of the Asset of Goods{" "}
+                    <span style={{ color: "#E53E3E" }}>*</span>
                   </Typography>
                   <TextField
                     fullWidth
@@ -291,32 +495,46 @@ const ApplyNow = () => {
                     required
                     sx={inputStyles}
                     value={formData.purpose}
-                    onChange={(e) => setFormData({ ...formData, purpose: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, purpose: e.target.value })
+                    }
                   />
                 </Grid>
 
                 {/* Checkbox Section */}
                 <Grid size={{ xs: 12 }}>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 2, color: 'text.primary' }}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: 700, mb: 2, color: "text.primary" }}
+                  >
                     Checkboxes
                   </Typography>
                   <FormControlLabel
                     control={
-                      <Checkbox 
+                      <Checkbox
                         required
                         checked={formData.confirmed}
-                        onChange={(e) => setFormData({ ...formData, confirmed: e.target.checked })}
-                        sx={{ 
-                          color: '#CBD5E0',
-                          '&.Mui-checked': {
-                            color: 'primary.main',
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            confirmed: e.target.checked,
+                          })
+                        }
+                        sx={{
+                          color: "#CBD5E0",
+                          "&.Mui-checked": {
+                            color: "primary.main",
                           },
-                        }} 
+                        }}
                       />
                     }
                     label={
-                      <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
-                        I confirm that the information provided is accurate and agree to be contacted by TND Kapital
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "text.secondary", fontWeight: 500 }}
+                      >
+                        I confirm that the information provided is accurate and
+                        agree to be contacted by TND Kapital
                       </Typography>
                     }
                   />
@@ -327,21 +545,22 @@ const ApplyNow = () => {
                   <Button
                     type="submit"
                     variant="contained"
+                    disabled={loading}
                     sx={{
-                      bgcolor: '#0D244D',
-                      color: 'white',
+                      bgcolor: "#0D244D",
+                      color: "white",
                       py: 1.5,
                       px: 5,
-                      fontSize: '1.1rem',
+                      fontSize: "1.1rem",
                       fontWeight: 700,
                       borderRadius: 1,
-                      '&:hover': {
-                        bgcolor: '#081A3A',
+                      "&:hover": {
+                        bgcolor: "#081A3A",
                       },
-                      mt: 2
+                      mt: 2,
                     }}
                   >
-                    Submit
+                    {loading ? "Submitting..." : "Submit"}
                   </Button>
                 </Grid>
               </Grid>
@@ -355,4 +574,3 @@ const ApplyNow = () => {
 };
 
 export default ApplyNow;
-

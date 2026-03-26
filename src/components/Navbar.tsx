@@ -52,8 +52,8 @@ const Navbar = () => {
         <Image
           src="https://tndkapital.com/wp-content/uploads/2025/05/Untitled-design-70.png"
           alt="TND Kapital Logo"
-          width={150}
-          height={50}
+          width={250}
+          height={120}
           style={{ objectFit: 'contain' }}
         />
       </Box>
