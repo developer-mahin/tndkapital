@@ -1,8 +1,11 @@
+'use client';
+
 import React from 'react';
 import { Box, Container, Typography, Grid, Button, Stack, Divider, Paper } from '@mui/material';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollReveal from '@/components/ScrollReveal';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
@@ -67,7 +70,7 @@ const OurProducts = () => {
             maxWidth="md"
             sx={{ position: "relative", zIndex: 1, textAlign: "center" }}
           >
-            <ScrollReveal variant="fade">
+            <ScrollReveal variant="fade" duration={1.2}>
               <Typography
                 variant="h1"
                 sx={{
@@ -96,7 +99,7 @@ const OurProducts = () => {
         <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
           <Grid container spacing={8} alignItems="center">
             <Grid size={{ xs: 12, md: 6 }}>
-              <ScrollReveal variant="slideRight">
+              <ScrollReveal variant="slideRight" distance={30}>
                 <Box
                   sx={{
                     position: "relative",
@@ -116,7 +119,7 @@ const OurProducts = () => {
               </ScrollReveal>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
-              <ScrollReveal variant="slideLeft">
+              <ScrollReveal variant="slideLeft" distance={30} delay={0.2}>
                 <Box>
                   <Typography
                     variant="overline"
@@ -166,6 +169,11 @@ const OurProducts = () => {
                         py: 1.5,
                         borderRadius: 2,
                         bgcolor: "primary.main",
+                        transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                        "&:hover": {
+                          transform: "translateY(-4px)",
+                          boxShadow: "0 8px 20px rgba(13, 36, 77, 0.3)",
+                        }
                       }}
                     >
                       Get Started
@@ -182,7 +190,7 @@ const OurProducts = () => {
           <Container maxWidth="lg">
             <Grid container spacing={8} alignItems="flex-start">
               <Grid size={{ xs: 12, md: 6 }}>
-                <ScrollReveal variant="slideRight">
+                <ScrollReveal variant="slideRight" distance={30}>
                   <Box>
                     <Typography
                       variant="overline"
@@ -226,93 +234,47 @@ const OurProducts = () => {
                     </Typography>
 
                     <Stack spacing={4}>
-                      <Box>
-                        <Typography
-                          variant="h6"
-                          sx={{ color: "primary.main", fontWeight: 700, mb: 1 }}
-                        >
-                          Access What You Need — Without Interest or Debt
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          sx={{ color: "text.secondary", lineHeight: 1.7 }}
-                        >
-                          Personalized, interest-free purchasing programs
-                          grounded in Islamic principles — helping you grow with
-                          dignity, clarity, and purpose. Every offering is
-                          reviewed and approved by an independent Sharia
-                          Supervisory Board (SSB) to ensure full alignment with
-                          ethical standards every step of the way.
-                        </Typography>
-                        <Divider sx={{ mt: 3 }} />
-                      </Box>
-
-                      <Box>
-                        <Typography
-                          variant="h6"
-                          sx={{ color: "primary.main", fontWeight: 700, mb: 1 }}
-                        >
-                          Cost Plus Profit (CPP)
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          sx={{ color: "text.secondary", lineHeight: 1.7 }}
-                        >
-                          Buy what you need today — with full transparency and
-                          no interest. A Sharia-compliant plan where we buy the
-                          goods you need and sell them to you at a pre-agreed
-                          profit, repayable in installments. Applicable for
-                          Personal (Household items) or Business (Products or
-                          Tools).
-                        </Typography>
-                        <Divider sx={{ mt: 3 }} />
-                      </Box>
-
-                      <Box>
-                        <Typography
-                          variant="h6"
-                          sx={{ color: "primary.main", fontWeight: 700, mb: 1 }}
-                        >
-                          Thrive Together Partnership (TTP)
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          sx={{ color: "text.secondary", lineHeight: 1.7 }}
-                        >
-                          You bring the skills. We bring the resources. We grow
-                          together. A trust-based partnership built on Islamic
-                          values. TND Kapital provides the goods or materials
-                          your venture needs, and you manage the business. We
-                          grow and share in the profit — no pressure.
-                        </Typography>
-                        <Divider sx={{ mt: 3 }} />
-                      </Box>
-
-                      <Box>
-                        <Typography
-                          variant="h6"
-                          sx={{ color: "primary.main", fontWeight: 700, mb: 1 }}
-                        >
-                          Group Empowerment Program (GEP)
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          sx={{ color: "text.secondary", lineHeight: 1.7 }}
-                        >
-                          Strong alone. Stronger together. Our
-                          community-centered Outreach Program is designed
-                          specifically for groups or co-ops. Members support
-                          each other's success through trust, shared
-                          responsibility, and collective empowerment.
-                        </Typography>
-                      </Box>
+                      {[
+                        {
+                          title: "Access What You Need — Without Interest or Debt",
+                          desc: "Personalized, interest-free purchasing programs grounded in Islamic principles — helping you grow with dignity, clarity, and purpose. Every offering is reviewed and approved by an independent Sharia Supervisory Board (SSB) to ensure full alignment with ethical standards every step of the way."
+                        },
+                        {
+                          title: "Cost Plus Profit (CPP)",
+                          desc: "Buy what you need today — with full transparency and no interest. A Sharia-compliant plan where we buy the goods you need and sell them to you at a pre-agreed profit, repayable in installments. Applicable for Personal (Household items) or Business (Products or Tools)."
+                        },
+                        {
+                          title: "Thrive Together Partnership (TTP)",
+                          desc: "You bring the skills. We bring the resources. We grow together. A trust-based partnership built on Islamic values. TND Kapital provides the goods or materials your venture needs, and you manage the business. We grow and share in the profit — no pressure."
+                        },
+                        {
+                          title: "Group Empowerment Program (GEP)",
+                          desc: "Strong alone. Stronger together. Our community-centered Outreach Program is designed specifically for groups or co-ops. Members support each other's success through trust, shared responsibility, and collective empowerment."
+                        }
+                      ].map((item, idx) => (
+                        <Box key={idx}>
+                          <Typography
+                            variant="h6"
+                            sx={{ color: "primary.main", fontWeight: 700, mb: 1 }}
+                          >
+                            {item.title}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{ color: "text.secondary", lineHeight: 1.7 }}
+                          >
+                            {item.desc}
+                          </Typography>
+                          {idx < 3 && <Divider sx={{ mt: 3 }} />}
+                        </Box>
+                      ))}
                     </Stack>
                   </Box>
                 </ScrollReveal>
               </Grid>
 
               <Grid size={{ xs: 12, md: 6 }}>
-                <ScrollReveal variant="slideLeft">
+                <ScrollReveal variant="slideLeft" distance={30} delay={0.3}>
                   <Box sx={{ position: "relative", pt: { md: 10 } }}>
                     <Box
                       sx={{
@@ -330,32 +292,34 @@ const OurProducts = () => {
                         style={{ objectFit: "cover" }}
                       />
                     </Box>
-                    <Paper
-                      elevation={10}
-                      sx={{
-                        position: "absolute",
-                        bottom: -30,
-                        right: { xs: 20, md: -30 },
-                        p: 4,
-                        maxWidth: 280,
-                        borderRadius: 2,
-                        bgcolor: "white",
-                        zIndex: 2,
-                      }}
-                    >
-                      <Typography
-                        variant="h6"
+                    <ScrollReveal variant="zoomIn" delay={0.6}>
+                      <Paper
+                        elevation={10}
                         sx={{
-                          color: "primary.main",
-                          fontSize: "1.1rem",
-                          fontWeight: 700,
-                          lineHeight: 1.4,
+                          position: "absolute",
+                          bottom: -30,
+                          right: { xs: 20, md: -30 },
+                          p: 4,
+                          maxWidth: 280,
+                          borderRadius: 2,
+                          bgcolor: "white",
+                          zIndex: 2,
                         }}
                       >
-                        Making ethical access and opportunity a reality for
-                        families & entrepreneurs
-                      </Typography>
-                    </Paper>
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            color: "primary.main",
+                            fontSize: "1.1rem",
+                            fontWeight: 700,
+                            lineHeight: 1.4,
+                          }}
+                        >
+                          Making ethical access and opportunity a reality for
+                          families & entrepreneurs
+                        </Typography>
+                      </Paper>
+                    </ScrollReveal>
                   </Box>
                 </ScrollReveal>
               </Grid>
@@ -367,7 +331,7 @@ const OurProducts = () => {
         <Container maxWidth="lg" sx={{ py: { xs: 8, md: 15 } }}>
           <Grid container spacing={10}>
             <Grid size={{ xs: 12, md: 5 }}>
-              <ScrollReveal variant="slideRight">
+              <ScrollReveal variant="slideRight" distance={30}>
                 <Typography
                   variant="overline"
                   sx={{
@@ -414,6 +378,10 @@ const OurProducts = () => {
                       py: 1.5,
                       borderRadius: 2,
                       bgcolor: "primary.main",
+                      transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                      "&:hover": {
+                        transform: "translateY(-4px)",
+                      }
                     }}
                   >
                     Learn More
@@ -423,75 +391,78 @@ const OurProducts = () => {
             </Grid>
 
             <Grid size={{ xs: 12, md: 7 }}>
-              <Grid container spacing={4}>
-                {[
-                  {
-                    icon: (
-                      <VerifiedUserIcon
-                        sx={{ color: "secondary.main", fontSize: 40 }}
-                      />
-                    ),
-                    title: "Designed for Dignity",
-                    description:
-                      "Every solution we offer is crafted to empower individuals and families — helping you grow, build, and thrive with dignity. No cold lines. No fine print. Just partnership.",
-                  },
-                  {
-                    icon: (
-                      <LanguageIcon
-                        sx={{ color: "secondary.main", fontSize: 40 }}
-                      />
-                    ),
-                    title: "Local Presence, Global Vision",
-                    description:
-                      "From village markets to urban hubs, our team understands the realities on the ground. We combine grassroots presence with a global outlook — giving you personalized support you can trust.",
-                  },
-                  {
-                    icon: (
-                      <HandshakeIcon
-                        sx={{ color: "secondary.main", fontSize: 40 }}
-                      />
-                    ),
-                    title: "Rooted in Values, Reviewed by Experts",
-                    description:
-                      "All of our offerings are reviewed and approved by an independent Sharia Supervisory Board (SSB) to ensure full alignment with Islamic ethics and transparency.",
-                  },
-                  {
-                    icon: (
-                      <GroupIcon
-                        sx={{ color: "secondary.main", fontSize: 40 }}
-                      />
-                    ),
-                    title: "More Than a Service — A Partner on Your Journey",
-                    description:
-                      "We don't just provide solutions — we walk with you. Whether you're starting a business, securing a household item, or planning ahead, we're here for the long term.",
-                  },
-                ].map((feature, index) => (
-                  <Grid size={{ xs: 12, sm: 6 }} key={index}>
-                    <ScrollReveal variant="slideUp" delay={index * 0.1}>
-                      <Box sx={{ p: 2 }}>
-                        <Box sx={{ mb: 2 }}>{feature.icon}</Box>
-                        <Typography
-                          variant="h6"
-                          sx={{
-                            color: "primary.main",
-                            fontWeight: 700,
-                            mb: 1,
-                            fontSize: "1.1rem",
-                          }}
-                        >
-                          {feature.title}
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          sx={{ color: "text.secondary", lineHeight: 1.6 }}
-                        >
-                          {feature.description}
-                        </Typography>
-                      </Box>
-                    </ScrollReveal>
-                  </Grid>
-                ))}
-              </Grid>
+              <ScrollReveal staggerChildren={0.15}>
+                <Grid container spacing={4}>
+                  {[
+                    {
+                      icon: (
+                        <VerifiedUserIcon
+                          sx={{ color: "secondary.main", fontSize: 40 }}
+                        />
+                      ),
+                      title: "Designed for Dignity",
+                      description:
+                        "Every solution we offer is crafted to empower individuals and families — helping you grow, build, and thrive with dignity. No cold lines. No fine print. Just partnership.",
+                    },
+                    {
+                      icon: (
+                        <LanguageIcon
+                          sx={{ color: "secondary.main", fontSize: 40 }}
+                        />
+                      ),
+                      title: "Local Presence, Global Vision",
+                      description:
+                        "From village markets to urban hubs, our team understands the realities on the ground. We combine grassroots presence with a global outlook — giving you personalized support you can trust.",
+                    },
+                    {
+                      icon: (
+                        <HandshakeIcon
+                          sx={{ color: "secondary.main", fontSize: 40 }}
+                        />
+                      ),
+                      title: "Rooted in Values, Reviewed by Experts",
+                      description:
+                        "All of our offerings are reviewed and approved by an independent Sharia Supervisory Board (SSB) to ensure full alignment with Islamic ethics and transparency.",
+                    },
+                    {
+                      icon: (
+                        <GroupIcon
+                          sx={{ color: "secondary.main", fontSize: 40 }}
+                        />
+                      ),
+                      title: "More Than a Service — A Partner on Your Journey",
+                      description:
+                        "We don't just provide solutions — we walk with you. Whether you're starting a business, securing a household item, or planning ahead, we're here for the long term.",
+                    },
+                  ].map((feature, index) => (
+                    <Grid size={{ xs: 12, sm: 6 }} key={index} component={motion.div} variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0 }
+                    }}>
+                        <Box sx={{ p: 2 }}>
+                          <Box sx={{ mb: 2 }}>{feature.icon}</Box>
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              color: "primary.main",
+                              fontWeight: 700,
+                              mb: 1,
+                              fontSize: "1.1rem",
+                            }}
+                          >
+                            {feature.title}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{ color: "text.secondary", lineHeight: 1.6 }}
+                          >
+                            {feature.description}
+                          </Typography>
+                        </Box>
+                    </Grid>
+                  ))}
+                </Grid>
+              </ScrollReveal>
             </Grid>
           </Grid>
         </Container>
@@ -534,7 +505,7 @@ const OurProducts = () => {
             />
           </Box>
           <Container maxWidth="md" sx={{ position: "relative", zIndex: 1 }}>
-            <ScrollReveal variant="fade">
+            <ScrollReveal variant="zoomIn" scale={0.9}>
               <Typography
                 variant="h2"
                 sx={{
@@ -571,7 +542,7 @@ const OurProducts = () => {
                     borderRadius: 2,
                     boxShadow: "0 10px 20px rgba(0,0,0,0.2)",
                     "&:hover": {
-                      transform: "translateY(-2px)",
+                      transform: "translateY(-4px) scale(1.05)",
                       boxShadow: "0 15px 30px rgba(0,0,0,0.3)",
                     },
                     transition: "all 0.3s ease",

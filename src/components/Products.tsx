@@ -5,6 +5,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import PublicIcon from "@mui/icons-material/Public";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, Container, Grid, Typography } from "@mui/material";
+import { motion } from "framer-motion";
+import ScrollReveal from "./ScrollReveal";
 import ProductCard from "./ProductCard";
 
 const products = [
@@ -85,26 +87,38 @@ const Products = () => {
 
       <Container maxWidth={false} sx={{ position: "relative", zIndex: 1, px: { xs: 2, md: 4 } }}>
         <Box sx={{ textAlign: "center", mb: 8, maxWidth: 900, mx: "auto" }}>
-          <Typography
-            variant="h2"
-            sx={{
-              color: "#0D244D",
-              fontWeight: 800,
-              fontSize: { xs: "2rem", md: "2.8rem" },
-              lineHeight: 1.2,
-            }}
-          >
-            Empowering Your Future with Ethical, Faith-Based Solutions
-          </Typography>
+          <ScrollReveal variant="fadeUp" duration={0.6}>
+            <Typography
+              variant="h2"
+              sx={{
+                color: "#0D244D",
+                fontWeight: 800,
+                fontSize: { xs: "2rem", md: "2.8rem" },
+                lineHeight: 1.2,
+              }}
+            >
+              Empowering Your Future with Ethical, Faith-Based Solutions
+            </Typography>
+          </ScrollReveal>
         </Box>
 
-        <Grid container spacing={3}>
-          {products.map((product) => (
-            <Grid key={product.title} size={{ xs: 12, sm: 6, md: 3 }}>
-              <ProductCard {...product} />
-            </Grid>
-          ))}
-        </Grid>
+        <ScrollReveal staggerChildren={0.1}>
+          <Grid container spacing={3}>
+            {products.map((product) => (
+              <Grid key={product.title} size={{ xs: 12, sm: 6, md: 3 }}>
+                <motion.div 
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 }
+                  }}
+                  style={{ height: '100%' }}
+                >
+                  <ProductCard {...product} />
+                </motion.div>
+              </Grid>
+            ))}
+          </Grid>
+        </ScrollReveal>
       </Container>
     </Box>
   );

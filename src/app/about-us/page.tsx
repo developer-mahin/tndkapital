@@ -1,8 +1,11 @@
+'use client';
+
 import React from 'react';
 import { Box, Container, Typography, Grid, Paper, Button } from '@mui/material';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollReveal from '@/components/ScrollReveal';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 const AboutUs = () => {
@@ -51,7 +54,7 @@ const AboutUs = () => {
             />
           </Box>
           <Container maxWidth="md">
-            <ScrollReveal variant="fade">
+            <ScrollReveal variant="fade" duration={1.2}>
               <Typography 
                 variant="h1" 
                 sx={{ 
@@ -82,7 +85,7 @@ const AboutUs = () => {
         <Container maxWidth="lg" sx={{ py: { xs: 10, md: 15 } }}>
           <Grid container spacing={8} alignItems="center">
             <Grid size={{ xs: 12, md: 6 }}>
-              <ScrollReveal variant="slideRight">
+              <ScrollReveal variant="slideRight" distance={30}>
                 <Box
                   sx={{
                     position: 'relative',
@@ -102,7 +105,7 @@ const AboutUs = () => {
               </ScrollReveal>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
-              <ScrollReveal variant="slideLeft">
+              <ScrollReveal variant="slideLeft" distance={30} delay={0.2}>
                 <Typography 
                   variant="overline" 
                   sx={{ 
@@ -170,8 +173,11 @@ const AboutUs = () => {
                     fontSize: '1rem',
                     fontWeight: 600,
                     textTransform: 'none',
+                    transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                     '&:hover': {
-                      bgcolor: '#081a38'
+                      bgcolor: '#081a38',
+                      transform: 'translateY(-4px)',
+                      boxShadow: '0 8px 20px rgba(12, 39, 82, 0.3)'
                     }
                   }}
                 >
@@ -185,35 +191,41 @@ const AboutUs = () => {
         {/* Trusted Grid Section */}
         <Box sx={{ py: { xs: 10, md: 15 }, bgcolor: 'white' }}>
           <Container maxWidth="lg">
-            <Typography 
-              variant="h3" 
-              textAlign="center" 
-              sx={{ 
-                color: '#0C2752', 
-                mb: 8, 
-                fontWeight: 700,
-                fontSize: { xs: '2rem', md: '3rem' }
-              }}
-            >
-              Trusted, Transparent, and Innovative.
-            </Typography>
-            <Grid container spacing={4}>
-              {[
-                {
-                  title: "Rooted in Values. Built for People.",
-                  description: "TND Kapital was founded on the bold belief that everyone deserves dignified access to tools that can improve their lives — without interest, exploitation, or pressure. We're not a bank. We're not a traditional lender. We're a value-driven company offering trade-based solutions that honor faith, family, and community.\n\nWhat began as a personal mission is now evolving into a movement of empowerment — one home, one business, one community at a time."
-                },
-                {
-                  title: "Inclusive By Design.",
-                  description: "At TND Kapital, we serve everyone with dignity and fairness — regardless of religion.\n\nWhether Muslim or non-Muslim, if your request meets our criteria and supports ethical, halal business or trade, you're welcome.\n\nWe believe values matter more than labels — and dignity belongs to all."
-                },
-                {
-                  title: "Our Future Is Collective.",
-                  description: "This is just the beginning. We're building something meaningful — and we believe in doing it the right way, even if that means growing slow and strong. If you believe in empowerment through trust and community — you're in the right place. Join Us."
-                }
-              ].map((card, index) => (
-                <Grid size={{ xs: 12, md: 4 }} key={index}>
-                  <ScrollReveal variant="zoomIn" delay={index * 0.2}>
+            <ScrollReveal variant="fadeUp">
+              <Typography 
+                variant="h3" 
+                textAlign="center" 
+                sx={{ 
+                  color: '#0C2752', 
+                  mb: 8, 
+                  fontWeight: 700,
+                  fontSize: { xs: '2rem', md: '3rem' }
+                }}
+              >
+                Trusted, Transparent, and Innovative.
+              </Typography>
+            </ScrollReveal>
+            
+            <ScrollReveal staggerChildren={0.2}>
+              <Grid container spacing={4}>
+                {[
+                  {
+                    title: "Rooted in Values. Built for People.",
+                    description: "TND Kapital was founded on the bold belief that everyone deserves dignified access to tools that can improve their lives — without interest, exploitation, or pressure. We're not a bank. We're not a traditional lender. We're a value-driven company offering trade-based solutions that honor faith, family, and community.\n\nWhat began as a personal mission is now evolving into a movement of empowerment — one home, one business, one community at a time."
+                  },
+                  {
+                    title: "Inclusive By Design.",
+                    description: "At TND Kapital, we serve everyone with dignity and fairness — regardless of religion.\n\nWhether Muslim or non-Muslim, if your request meets our criteria and supports ethical, halal business or trade, you're welcome.\n\nWe believe values matter more than labels — and dignity belongs to all."
+                  },
+                  {
+                    title: "Our Future Is Collective.",
+                    description: "This is just the beginning. We're building something meaningful — and we believe in doing it the right way, even if that means growing slow and strong. If you believe in empowerment through trust and community — you're in the right place. Join Us."
+                  }
+                ].map((card, index) => (
+                  <Grid size={{ xs: 12, md: 4 }} key={index} component={motion.div} variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0 }
+                  }}>
                     <Paper 
                       elevation={0} 
                       sx={{ 
@@ -225,7 +237,12 @@ const AboutUs = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        transition: 'all 0.3s ease-in-out',
+                        '&:hover': {
+                          transform: 'translateY(-10px)',
+                          boxShadow: '0 20px 40px rgba(12, 39, 82, 0.2)'
+                        }
                       }}
                     >
                       <Box sx={{ mb: 4, width: '100px', height: '40px', position: 'relative' }}>
@@ -243,10 +260,10 @@ const AboutUs = () => {
                         {card.description}
                       </Typography>
                     </Paper>
-                  </ScrollReveal>
-                </Grid>
-              ))}
-            </Grid>
+                  </Grid>
+                ))}
+              </Grid>
+            </ScrollReveal>
           </Container>
         </Box>
 
@@ -281,7 +298,7 @@ const AboutUs = () => {
             />
           </Box>
           <Container maxWidth="md">
-            <ScrollReveal variant="zoomIn">
+            <ScrollReveal variant="zoomIn" scale={0.9}>
               <Paper
                 elevation={0}
                 sx={{
@@ -325,8 +342,10 @@ const AboutUs = () => {
                     fontSize: '1.1rem',
                     fontWeight: 700,
                     textTransform: 'none',
+                    transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                     '&:hover': {
-                      bgcolor: '#f5f5f5'
+                      bgcolor: '#f5f5f5',
+                      transform: 'scale(1.05) translateY(-5px)',
                     }
                   }}
                 >

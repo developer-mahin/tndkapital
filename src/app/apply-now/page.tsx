@@ -67,7 +67,6 @@ const inputStyles = {
 
 const ApplyNow = () => {
   const [submitted, setSubmitted] = useState<boolean>(false);
-  const [country, setCountry] = useState<string>("");
   const [formData, setFormData] = useState<{
     firstName: string;
     middleName: string;
@@ -224,7 +223,7 @@ const ApplyNow = () => {
       </Snackbar>
       <main style={{ flexGrow: 1 }}>
         <Container maxWidth="lg" sx={{ pt: { xs: 15, md: 20 }, pb: 10 }}>
-          <ScrollReveal variant="fade">
+          <ScrollReveal variant="fade" duration={1.2}>
             <Typography
               variant="h1"
               sx={{
@@ -254,16 +253,26 @@ const ApplyNow = () => {
             </Typography>
           </ScrollReveal>
 
-          <ScrollReveal variant="slideUp">
-            <Box component="form" onSubmit={handleSubmit}>
+          <ScrollReveal variant="slideUp" distance={40} delay={0.2}>
+            <Box 
+              component="form" 
+              onSubmit={handleSubmit}
+              sx={{
+                p: { xs: 3, md: 6 },
+                borderRadius: 4,
+                bgcolor: "white",
+                boxShadow: "0 20px 50px rgba(13, 36, 77, 0.08)",
+                border: "1px solid rgba(13, 36, 77, 0.05)",
+              }}
+            >
               <Grid container spacing={4}>
                 {/* Name Section */}
                 <Grid size={{ xs: 12 }}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
+                    sx={{ fontWeight: 700, mb: 1.5, color: "text.primary" }}
                   >
-                    Name <span style={{ color: "#E53E3E" }}>*</span>
+                    Full Name <span style={{ color: "#E53E3E" }}>*</span>
                   </Typography>
                   <Grid container spacing={2}>
                     <Grid size={{ xs: 12, sm: 4 }}>
@@ -310,153 +319,157 @@ const ApplyNow = () => {
                   </Grid>
                 </Grid>
 
-                {/* Country Section */}
-                <Grid size={{ xs: 12 }}>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
-                  >
-                    Select Country <span style={{ color: "#E53E3E" }}>*</span>
-                  </Typography>
-                  <TextField
-                    fullWidth
-                    select
-                    required
-                    sx={inputStyles}
-                    value={formData.country}
-                    onChange={(e) =>
-                      setFormData({ ...formData, country: e.target.value })
-                    }
-                  >
-                    {countries.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
+                {/* Country and Hub Section */}
+                <Grid container spacing={4} size={{ xs: 12 }}>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: 700, mb: 1.5, color: "text.primary" }}
+                    >
+                      Select Country <span style={{ color: "#E53E3E" }}>*</span>
+                    </Typography>
+                    <TextField
+                      fullWidth
+                      select
+                      required
+                      sx={inputStyles}
+                      value={formData.country}
+                      onChange={(e) =>
+                        setFormData({ ...formData, country: e.target.value })
+                      }
+                    >
+                      {countries.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
+
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: 700, mb: 1.5, color: "text.primary" }}
+                    >
+                      Select Hub <span style={{ color: "#E53E3E" }}>*</span>
+                    </Typography>
+                    <TextField
+                      fullWidth
+                      select
+                      required
+                      disabled={hubs?.length === 0}
+                      sx={inputStyles}
+                      value={formData.hub}
+                      onChange={(e) =>
+                        setFormData({ ...formData, hub: e.target.value })
+                      }
+                    >
+                      {hubs.map((hub) => (
+                        <MenuItem key={hub._id} value={hub._id}>
+                          {hub.locationName}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
                 </Grid>
 
-                <Grid size={{ xs: 12 }}>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
-                  >
-                    Select Hub <span style={{ color: "#E53E3E" }}>*</span>
-                  </Typography>
-                  <TextField
-                    fullWidth
-                    select
-                    required
-                    disabled={hubs?.length === 0}
-                    sx={inputStyles}
-                    value={formData.hub}
-                    onChange={(e) =>
-                      setFormData({ ...formData, hub: e.target.value })
-                    }
-                  >
-                    {hubs.map((hub) => (
-                      <MenuItem key={hub._id} value={hub._id}>
-                        {hub.locationName}
-                      </MenuItem>
-                    ))}
-                  </TextField>
+                {/* City and Address Section */}
+                <Grid container spacing={4} size={{ xs: 12 }}>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: 700, mb: 1.5, color: "text.primary" }}
+                    >
+                      City Name <span style={{ color: "#E53E3E" }}>*</span>
+                    </Typography>
+                    <TextField
+                      fullWidth
+                      placeholder="Type City Name"
+                      required
+                      sx={inputStyles}
+                      value={formData.cityName}
+                      onChange={(e) =>
+                        setFormData({ ...formData, cityName: e.target.value })
+                      }
+                    />
+                  </Grid>
+
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: 700, mb: 1.5, color: "text.primary" }}
+                    >
+                      Home Address <span style={{ color: "#E53E3E" }}>*</span>
+                    </Typography>
+                    <TextField
+                      fullWidth
+                      placeholder="Type Home Address"
+                      required
+                      sx={inputStyles}
+                      value={formData.homeAddress}
+                      onChange={(e) =>
+                        setFormData({ ...formData, homeAddress: e.target.value })
+                      }
+                    />
+                  </Grid>
                 </Grid>
 
-                {/* City Section */}
-                <Grid size={{ xs: 12 }}>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
-                  >
-                    City Name <span style={{ color: "#E53E3E" }}>*</span>
-                  </Typography>
-                  <TextField
-                    fullWidth
-                    placeholder="Type City Name"
-                    required
-                    sx={inputStyles}
-                    value={formData.cityName}
-                    onChange={(e) =>
-                      setFormData({ ...formData, cityName: e.target.value })
-                    }
-                  />
+                {/* Contact Information Section */}
+                <Grid container spacing={4} size={{ xs: 12 }}>
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: 700, mb: 1.5, color: "text.primary" }}
+                    >
+                      WhatsApp Phone Number{" "}
+                      <span style={{ color: "#E53E3E" }}>*</span>
+                    </Typography>
+                    <TextField
+                      fullWidth
+                      placeholder="Country Code + Number"
+                      required
+                      sx={inputStyles}
+                      value={formData.phone}
+                      onChange={(e) =>
+                        setFormData({ ...formData, phone: e.target.value })
+                      }
+                    />
+                  </Grid>
+
+                  <Grid size={{ xs: 12, md: 6 }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: 700, mb: 1.5, color: "text.primary" }}
+                    >
+                      Your Email Address{" "}
+                      <span style={{ color: "#E53E3E" }}>*</span>
+                    </Typography>
+                    <TextField
+                      fullWidth
+                      placeholder="Type Your Email Address"
+                      required
+                      type="email"
+                      sx={inputStyles}
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <EmailIcon sx={{ color: "#4FD1C5" }} />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Grid>
                 </Grid>
 
-                {/* Address Section */}
+                {/* Product Type Requested */}
                 <Grid size={{ xs: 12 }}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
-                  >
-                    Home Address <span style={{ color: "#E53E3E" }}>*</span>
-                  </Typography>
-                  <TextField
-                    fullWidth
-                    placeholder="Type Home Address"
-                    required
-                    sx={inputStyles}
-                    value={formData.homeAddress}
-                    onChange={(e) =>
-                      setFormData({ ...formData, homeAddress: e.target.value })
-                    }
-                  />
-                </Grid>
-
-                {/* Phone Section */}
-                <Grid size={{ xs: 12 }}>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
-                  >
-                    WhatsApp Phone Number{" "}
-                    <span style={{ color: "#E53E3E" }}>*</span>
-                  </Typography>
-                  <TextField
-                    fullWidth
-                    placeholder="Country Code + Number"
-                    required
-                    sx={inputStyles}
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
-                  />
-                </Grid>
-
-                {/* Email Section */}
-                <Grid size={{ xs: 12 }}>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
-                  >
-                    Your Email Address{" "}
-                    <span style={{ color: "#E53E3E" }}>*</span>
-                  </Typography>
-                  <TextField
-                    fullWidth
-                    placeholder="Type Your Email Address"
-                    required
-                    type="email"
-                    sx={inputStyles}
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <EmailIcon sx={{ color: "#4FD1C5" }} />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Grid>
-
-                {/* Product Section */}
-                <Grid size={{ xs: 12 }}>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
+                    sx={{ fontWeight: 700, mb: 1.5, color: "text.primary" }}
                   >
                     Type of Product Requested{" "}
                     <span style={{ color: "#E53E3E" }}>*</span>
@@ -479,11 +492,11 @@ const ApplyNow = () => {
                   </TextField>
                 </Grid>
 
-                {/* Purpose Section */}
+                {/* Purpose of Goods Section */}
                 <Grid size={{ xs: 12 }}>
                   <Typography
                     variant="subtitle1"
-                    sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}
+                    sx={{ fontWeight: 700, mb: 1.5, color: "text.primary" }}
                   >
                     Describe in detail the Purpose of the Asset of Goods{" "}
                     <span style={{ color: "#E53E3E" }}>*</span>
@@ -501,14 +514,8 @@ const ApplyNow = () => {
                   />
                 </Grid>
 
-                {/* Checkbox Section */}
+                {/* Confirmation Section */}
                 <Grid size={{ xs: 12 }}>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ fontWeight: 700, mb: 2, color: "text.primary" }}
-                  >
-                    Checkboxes
-                  </Typography>
                   <FormControlLabel
                     control={
                       <Checkbox
@@ -540,27 +547,33 @@ const ApplyNow = () => {
                   />
                 </Grid>
 
-                {/* Submit Button */}
+                {/* Submit button with micro-animation */}
                 <Grid size={{ xs: 12 }}>
                   <Button
                     type="submit"
                     variant="contained"
                     disabled={loading}
                     sx={{
-                      bgcolor: "#0D244D",
+                      bgcolor: "primary.main",
                       color: "white",
-                      py: 1.5,
-                      px: 5,
+                      py: 2,
+                      px: 8,
                       fontSize: "1.1rem",
                       fontWeight: 700,
-                      borderRadius: 1,
+                      borderRadius: 2,
+                      transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                       "&:hover": {
-                        bgcolor: "#081A3A",
+                        bgcolor: "primary.dark",
+                        transform: "translateY(-4px)",
+                        boxShadow: "0 10px 25px rgba(13, 36, 77, 0.25)",
+                      },
+                      "&:disabled": {
+                        bgcolor: "grey.400",
                       },
                       mt: 2,
                     }}
                   >
-                    {loading ? "Submitting..." : "Submit"}
+                    {loading ? "Submitting Application..." : "Submit Application"}
                   </Button>
                 </Grid>
               </Grid>

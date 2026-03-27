@@ -38,7 +38,7 @@ const ContactPage = () => {
           }}
         >
           <Container maxWidth="md" sx={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
-            <ScrollReveal variant="fade">
+            <ScrollReveal variant="zoomIn" scale={0.9} duration={1.2}>
               <Typography 
                 variant="h1" 
                 sx={{ 
@@ -59,7 +59,9 @@ const ContactPage = () => {
         {/* Main Content Section */}
         <Box sx={{ py: { xs: 8, md: 10 } }}>
           <Container maxWidth="lg">
-            <ContactUs />
+            <ScrollReveal variant="slideUp" distance={40}>
+              <ContactUs />
+            </ScrollReveal>
           </Container>
         </Box>
       </main>

@@ -1,3 +1,4 @@
+'use client';
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import HeroBottom from "@/components/HeroBottom";
@@ -17,28 +18,35 @@ export default function Home() {
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Navbar />
       <main style={{ flexGrow: 1 }}>
-        <ScrollReveal variant="fade">
+        <ScrollReveal variant="fade" duration={1.2}>
           <Hero />
         </ScrollReveal>
-        <ScrollReveal variant="slideUp">
+        
+        <ScrollReveal variant="fadeUp" distance={20} delay={0.2}>
           <HeroBottom />
         </ScrollReveal>
-        <ScrollReveal variant="slideUp">
+
+        <ScrollReveal variant="fadeUp">
           <WhoWeAre />
         </ScrollReveal>
-        <ScrollReveal variant="slideUp">
+
+        <ScrollReveal variant="fadeUp">
           <Products />
         </ScrollReveal>
-        <ScrollReveal variant="fade">
+
+        <ScrollReveal variant="fade" duration={1}>
           <TradeWithPurpose />
         </ScrollReveal>
-        <ScrollReveal variant="slideUp">
+
+        <ScrollReveal variant="fadeUp">
           <Promise />
         </ScrollReveal>
-        <ScrollReveal variant="fade">
+
+        <ScrollReveal variant="fadeUp">
           <Testimonials />
         </ScrollReveal>
-        <ScrollReveal variant="slideUp">
+
+        <ScrollReveal variant="fadeUp" distance={30}>
           <JoinUs />
         </ScrollReveal>
       </main>
