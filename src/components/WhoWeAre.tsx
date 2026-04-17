@@ -22,7 +22,7 @@ const WhoWeAre = () => {
               }}
             >
               <Image
-                src="https://tndkapital.com/wp-content/uploads/2025/10/IMG_3503.jpg"
+                src="https://api.tndk.app/public/uploads/images/images_1776398186664.png"
                 alt="Empowering Communities"
                 fill
                 style={{ objectFit: 'cover' }}

@@ -1,13 +1,13 @@
-'use client';
+
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import HeroBottom from "@/components/HeroBottom";
+import JoinUs from "@/components/JoinUs";
 import Navbar from "@/components/Navbar";
 import Products from "@/components/Products";
 import Promise from "@/components/Promise";
-import TradeWithPurpose from "@/components/TradeWithPurpose";
 import Testimonials from "@/components/Testimonials";
-import JoinUs from "@/components/JoinUs";
+import TradeWithPurpose from "@/components/TradeWithPurpose";
 import WhoWeAre from "@/components/WhoWeAre";
 import { Box } from "@mui/material";
 
