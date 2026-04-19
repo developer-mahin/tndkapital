@@ -1,7 +1,5 @@
 "use client";
 
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
 import ScrollReveal from "@/components/ScrollReveal";
 import EmailIcon from "@mui/icons-material/Email";
 import {
@@ -193,7 +191,6 @@ const ApplyNow = () => {
             </Button>
           </ScrollReveal>
         </Container>
-        <Footer />
       </Box>
     );
   }
@@ -207,7 +204,6 @@ const ApplyNow = () => {
         bgcolor: "white",
       }}
     >
-      <Navbar />
       <Snackbar
         open={snackbar.open}
         autoHideDuration={6000}
