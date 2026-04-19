@@ -42,7 +42,7 @@ const AboutUs = () => {
             }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" // Placeholder: Coworking/People
+              src="/images/eid-portrait-and-smile-of-family-at-table-in-dining-room-of-home-together-for-muslim-celebration-.jpg" // Placeholder: Coworking/People
               alt="Our Story Background"
               fill
               style={{ objectFit: "cover" }}
@@ -93,7 +93,7 @@ const AboutUs = () => {
                   }}
                 >
                   <Image
-                    src="https://images.unsplash.com/photo-1573164067505-19a2ef4ecf5c?q=80&w=1974&auto=format&fit=crop" // Placeholder: Handshake/Trust
+                    src="/images/31B0866C-D742-4CBD-81B8-AD48A2237A62-2048x1367.jpeg" // Placeholder: Handshake/Trust
                     alt="Building Ethical Futures"
                     fill
                     style={{ objectFit: "cover" }}
@@ -192,7 +192,7 @@ const AboutUs = () => {
         </Container>
 
         {/* Trusted Grid Section */}
-        <Box sx={{ py: { xs: 10, md: 15 }, bgcolor: "white" }}>
+        <Box sx={{ py: { xs: 6, md: 8 }, bgcolor: "white" }}>
           <Container maxWidth="lg">
             <ScrollReveal variant="fadeUp">
               <Typography
@@ -240,7 +240,7 @@ const AboutUs = () => {
                     <Paper
                       elevation={0}
                       sx={{
-                        p: 6,
+                        p: 4,
                         height: "100%",
                         bgcolor: "#0C2752",
                         color: "white",
@@ -265,28 +265,29 @@ const AboutUs = () => {
                         }}
                       >
                         <Image
-                          src="https://tndkapital.com/wp-content/uploads/2025/05/Untitled-design-70.png"
+                          src="/logo.png"
                           alt="TND Kapital"
                           fill
                           style={{
                             objectFit: "contain",
                             filter:
-                              "brightness(0) invert(1) sepia(1) saturate(1000%) hue-rotate(0deg)",
-                          }} // Making it look "gold" via filter if needed, but since it's white/gold naturally it might work.
+                              "brightness(0) invert(1) sepia(1) saturate(500%) hue-rotate(0deg)",
+                          }}
                         />
                       </Box>
                       <Typography
-                        variant="h5"
+                        variant="h6"
                         sx={{ mb: 3, fontWeight: 700, lineHeight: 1.2 }}
                       >
                         {card.title}
                       </Typography>
                       <Typography
-                        variant="body2"
+                        variant="body1"
                         sx={{
                           opacity: 0.9,
                           lineHeight: 1.8,
                           whiteSpace: "pre-line",
+                          fontSize: "12px"
                         }}
                       >
                         {card.description}
@@ -323,7 +324,7 @@ const AboutUs = () => {
             }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=2070&auto=format&fit=crop" // Placeholder: Family/Happy
+              src="/images/excited-pregnant-islamic-spouses-shopping-online-with-tablet-and-credit-card-at-home-relaxing.jpg"
               alt="CTA Background"
               fill
               style={{ objectFit: "cover" }}

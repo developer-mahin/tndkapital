@@ -53,7 +53,7 @@ const FAQsPage = () => {
             }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+              src="/images/IMG_3708-1.jpg"
               alt="FAQs Hero Background"
               fill
               style={{ objectFit: "cover", transform: "scale(1.1)" }}
@@ -139,7 +139,7 @@ const FAQsPage = () => {
         </Box>
 
         {/* Custom CTA Banner */}
-        <Container maxWidth="lg" sx={{ pb: { xs: 12, md: 25 } }}>
+        <Container maxWidth="lg" sx={{ pb: { xs: 6, md: 8 } }}>
           <ScrollReveal variant="zoomIn" duration={1.2}>
             <Paper
               elevation={20}
@@ -156,7 +156,7 @@ const FAQsPage = () => {
                 <Grid
                   size={{ xs: 12, md: 6 }}
                   sx={{
-                    p: { xs: 6, md: 12 },
+                    p: { xs: 6, md: 8 },
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
@@ -167,7 +167,7 @@ const FAQsPage = () => {
                     sx={{
                       mb: 3,
                       fontWeight: 800,
-                      fontSize: { xs: "2.5rem", md: "4rem" },
+                      fontSize: { xs: "1.5rem", md: "2.5rem" },
                       lineHeight: 1,
                       letterSpacing: "-0.04em",
                     }}
@@ -178,7 +178,7 @@ const FAQsPage = () => {
                     variant="body1"
                     sx={{
                       mb: 5,
-                      fontSize: "1.2rem",
+                      fontSize: "1rem",
                       opacity: 0.8,
                       maxWidth: "550px",
                       lineHeight: 1.6,
@@ -217,11 +217,11 @@ const FAQsPage = () => {
                   sx={{
                     position: "relative",
                     height: { xs: "300px", md: "auto" },
-                    minHeight: { md: "600px" },
+                    minHeight: { md: "300px" },
                   }}
                 >
                   <Image
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop"
+                    src="/images/C99C30D2-3A27-40D5-B183-8203636523FB__1_-removebg-preview.png"
                     alt="Empower Your Future"
                     fill
                     style={{ objectFit: "cover" }}
