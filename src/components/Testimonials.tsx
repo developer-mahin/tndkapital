@@ -1,32 +1,58 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { Box, Container, Typography, Grid, Avatar, Stack, Paper, Button } from '@mui/material';
-import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Grid,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const testimonialData = [
   {
     id: 1,
-    tag: 'TESTIMONIAL',
-    title: 'What Our Clients Say',
-    intro: 'Real stories from real people—see how our ethical business solutions are changing lives with dignity and trust.',
-    quote: 'Finally, a partner that aligns with my values. The Cost-Plus purchase plan was clear and fair, and the team guided me every step of the way.',
-    author: 'Natulu',
-    role: 'Business Owner',
-    image: 'https://cdn.antigravity.dev/mahin/hero_trade_logistics_revised_1774446624155.png',
-    avatar: 'https://cdn.antigravity.dev/mahin/hero_professional_interaction_1774446395960.png',
+    tag: "TESTIMONIAL",
+    title: "What Our Clients Say",
+    intro:
+      "Real stories from real people—see how our ethical business solutions are changing lives with dignity and trust.",
+    quote:
+      "Finally, a partner that aligns with my values. The Cost-Plus purchase plan was clear and fair, and the team guided me every step of the way.",
+    author: "Natulu",
+    role: "Business Owner",
+    image: "/images/Upscale-Boutique-768x512.png",
+    avatar: "/images/image3.jpeg",
   },
   {
     id: 2,
-    tag: 'SUCCESS STORY',
-    title: 'Growth with Integrity',
-    intro: 'Empowering local businesses with capital that respects Sharia principles and fosters sustainable community growth.',
-    quote: 'TND Kapital transformed our operations. Their interest-free model allowed us to expand our bakery without the burden of traditional debt.',
-    author: 'Ahmed K.',
-    role: 'Bakery Manager',
-    image: 'https://cdn.antigravity.dev/mahin/hero_bakery_workers_revised_1774446648119.png',
-    avatar: 'https://cdn.antigravity.dev/mahin/promise_values_woman_professional_1774451407927.png',
+    tag: "SUCCESS STORY",
+    title: "Growth with Integrity",
+    intro:
+      "Empowering local businesses with capital that respects Sharia principles and fosters sustainable community growth.",
+    quote:
+      "TND Kapital transformed our operations. Their interest-free model allowed us to expand our bakery without the burden of traditional debt.",
+    author: "Ahmed K.",
+    role: "Bakery Manager",
+    image: "/images/IMG_3503.jpg",
+    avatar: "/images/image14.jpeg",
+  },
+  {
+    id: 3,
+    tag: "SUCCESS STORY",
+    title: "Growth with Integrity",
+    intro:
+      "The Group Empowerment Program with TND Kapital gave our co-op access to real opportunities. We’re growing together—and staying debt-free.",
+    quote:
+      "TND Kapital helped me start my tailoring business without interest or pressure. Everything was explained with honesty, and I was treated with real respect.",
+    author: "Abdul",
+    role: "Tailor",
+    image: "/images/Co-op-Soap.png",
+    avatar: "/images/Co-op-Soap.png",
   },
 ];
 
@@ -36,14 +62,14 @@ const Testimonials = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % testimonialData.length);
-    }, 6000); // 6 seconds per slide
+    }, 10000); // 10 seconds per slide
     return () => clearInterval(timer);
   }, []);
 
   const current = testimonialData[index];
 
   return (
-    <Box sx={{ py: { xs: 10, md: 15 }, bgcolor: '#fff', overflow: 'hidden' }}>
+    <Box sx={{ py: { xs: 10, md: 15 }, bgcolor: "#fff", overflow: "hidden" }}>
       <Container maxWidth="lg">
         <Grid container spacing={8} alignItems="center">
           {/* Left Side: Content */}
@@ -60,21 +86,21 @@ const Testimonials = () => {
                   <Typography
                     variant="overline"
                     sx={{
-                      color: '#0D244D',
+                      color: "#0D244D",
                       fontWeight: 700,
                       letterSpacing: 2,
-                      fontSize: '0.9rem',
+                      fontSize: "0.9rem",
                     }}
                   >
                     {current.tag}
                   </Typography>
-                  
+
                   <Typography
                     variant="h2"
                     sx={{
-                      color: '#0D244D',
+                      color: "#0D244D",
                       fontWeight: 800,
-                      fontSize: { xs: '2.5rem', md: '3.5rem' },
+                      fontSize: { xs: "2.5rem", md: "3.5rem" },
                       lineHeight: 1.1,
                     }}
                   >
@@ -84,26 +110,33 @@ const Testimonials = () => {
                   <Typography
                     variant="body1"
                     sx={{
-                      color: '#666',
-                      fontSize: '1.1rem',
+                      color: "#666",
+                      fontSize: "1.1rem",
                       lineHeight: 1.6,
                     }}
                   >
                     {current.intro}
                   </Typography>
 
-                  <Box sx={{ width: '100%', height: '1px', bgcolor: '#eee', my: 2 }} />
+                  <Box
+                    sx={{
+                      width: "100%",
+                      height: "1px",
+                      bgcolor: "#eee",
+                      my: 2,
+                    }}
+                  />
 
                   <Typography
                     variant="h5"
                     sx={{
-                      color: '#444',
+                      color: "#444",
                       fontWeight: 500,
-                      fontSize: '1.25rem',
-                      fontStyle: 'italic',
+                      fontSize: "1.25rem",
+                      fontStyle: "italic",
                       lineHeight: 1.6,
-                      position: 'relative',
-                      minHeight: '100px',
+                      position: "relative",
+                      minHeight: "100px",
                     }}
                   >
                     &ldquo;{current.quote}&rdquo;
@@ -112,13 +145,24 @@ const Testimonials = () => {
                   <Stack direction="row" spacing={2} alignItems="center">
                     <Avatar
                       src={current.avatar}
-                      sx={{ width: 60, height: 60, border: '2px solid #0D244D' }}
+                      sx={{
+                        width: 60,
+                        height: 60,
+                        border: "2px solid #0D244D",
+                      }}
                     />
                     <Box>
-                      <Typography variant="h6" sx={{ fontWeight: 800, color: '#0D244D', fontSize: '1.1rem' }}>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontWeight: 800,
+                          color: "#0D244D",
+                          fontSize: "1.1rem",
+                        }}
+                      >
                         {current.author}
                       </Typography>
-                      <Typography variant="body2" sx={{ color: '#888' }}>
+                      <Typography variant="body2" sx={{ color: "#888" }}>
                         {current.role}
                       </Typography>
                     </Box>
@@ -136,10 +180,10 @@ const Testimonials = () => {
                   sx={{
                     width: i === index ? 30 : 10,
                     height: 6,
-                    bgcolor: i === index ? '#0D244D' : '#ddd',
+                    bgcolor: i === index ? "#0D244D" : "#ddd",
                     borderRadius: 3,
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
                   }}
                 />
               ))}
@@ -148,7 +192,7 @@ const Testimonials = () => {
 
           {/* Right Side: Image and Review Box */}
           <Grid size={{ xs: 12, md: 6 }}>
-            <Box sx={{ position: 'relative', width: '100%', ml: { md: 4 } }}>
+            <Box sx={{ position: "relative", width: "100%", ml: { md: 4 } }}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={index}
@@ -159,19 +203,19 @@ const Testimonials = () => {
                 >
                   <Box
                     sx={{
-                      position: 'relative',
-                      width: '100%',
-                      aspectRatio: '1/1.1',
+                      position: "relative",
+                      width: "100%",
+                      aspectRatio: "1/1.1",
                       borderRadius: 6,
-                      overflow: 'hidden',
-                      boxShadow: '0 30px 60px rgba(0,0,0,0.15)',
+                      overflow: "hidden",
+                      boxShadow: "0 30px 60px rgba(0,0,0,0.15)",
                     }}
                   >
                     <Image
                       src={current.image}
                       alt={current.author}
                       fill
-                      style={{ objectFit: 'cover' }}
+                      style={{ objectFit: "cover" }}
                     />
                   </Box>
                 </motion.div>
@@ -181,33 +225,39 @@ const Testimonials = () => {
               <Paper
                 elevation={10}
                 sx={{
-                  position: 'absolute',
-                  top: '50%',
+                  position: "absolute",
+                  top: "50%",
                   right: -40,
-                  transform: 'translateY(-50%)',
+                  transform: "translateY(-50%)",
                   width: 220,
                   borderRadius: 4,
-                  overflow: 'hidden',
-                  display: { xs: 'none', lg: 'block' },
+                  overflow: "hidden",
+                  display: { xs: "none", lg: "block" },
                   zIndex: 2,
                 }}
               >
-                <Box sx={{ p: 4, textAlign: 'center', bgcolor: 'white' }}>
-                  <Typography variant="h2" sx={{ fontWeight: 900, color: '#0D244D', mb: 1 }}>
+                <Box sx={{ p: 4, textAlign: "center", bgcolor: "white" }}>
+                  <Typography
+                    variant="h2"
+                    sx={{ fontWeight: 900, color: "#0D244D", mb: 1 }}
+                  >
                     4.8
                   </Typography>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#0D244D', mb: 2 }}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: 700, color: "#0D244D", mb: 2 }}
+                  >
                     512 Reviews
                   </Typography>
                   <Box
                     sx={{
-                      display: 'inline-block',
-                      bgcolor: '#0D244D',
-                      color: 'white',
+                      display: "inline-block",
+                      bgcolor: "#0D244D",
+                      color: "white",
                       px: 2,
                       py: 0.5,
                       borderRadius: 1,
-                      fontSize: '0.75rem',
+                      fontSize: "0.75rem",
                       fontWeight: 700,
                     }}
                   >
@@ -218,14 +268,14 @@ const Testimonials = () => {
                   fullWidth
                   variant="contained"
                   sx={{
-                    bgcolor: '#0D244D',
-                    color: 'white',
+                    bgcolor: "#0D244D",
+                    color: "white",
                     borderRadius: 0,
                     py: 1.5,
-                    fontSize: '0.85rem',
+                    fontSize: "0.85rem",
                     fontWeight: 700,
-                    textTransform: 'none',
-                    '&:hover': { bgcolor: '#0a1d3d' },
+                    textTransform: "none",
+                    "&:hover": { bgcolor: "#0a1d3d" },
                   }}
                 >
                   All Reviews

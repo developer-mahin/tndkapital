@@ -47,7 +47,7 @@ const Footer = () => {
           <Grid size={{ xs: 12, md: 3 }}>
             <Box>
               <Image
-                src="https://tndkapital.com/wp-content/uploads/2025/05/Untitled-design-70.png"
+                src="/logo.png"
                 alt="TND Kapital Logo"
                 width={280}
                 height={120}

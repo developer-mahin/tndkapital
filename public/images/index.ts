@@ -4,6 +4,7 @@ import banner3 from "./banner/3Banner.jpg";
 import banner4 from "./banner/4Banner.jpg";
 import banner5 from "./banner/5Banner.jpg";
 import banner6 from "./banner/6Banner.jpg";
+import treadWithPurpose from "./treadWithPurpose.jpg";
 
 const images = {
     banners: {
@@ -14,6 +15,9 @@ const images = {
         banner5,
         banner6,
     },
+    teamImage: {
+        treadWithPurpose
+    }
 };
 
 export default images;

@@ -1,48 +1,54 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Box, Container, Typography, Button, Grid, Paper } from '@mui/material';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import FAQs from '@/components/FAQs';
-import ScrollReveal from '@/components/ScrollReveal';
-import Image from 'next/image';
+import FAQs from "@/components/FAQs";
+import ScrollReveal from "@/components/ScrollReveal";
+import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
+import Image from "next/image";
 
 const FAQsPage = () => {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'white', maxWidth: '100vw', overflowX: 'hidden' }}>
-      <Navbar />
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        bgcolor: "white",
+        maxWidth: "100vw",
+        overflowX: "hidden",
+      }}
+    >
       <main style={{ flexGrow: 1 }}>
         {/* Hero Section */}
         <Box
           sx={{
-            position: 'relative',
-            height: { xs: '45vh', md: '55vh' },
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            textAlign: 'center',
-            overflow: 'hidden',
+            position: "relative",
+            height: { xs: "45vh", md: "55vh" },
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "white",
+            textAlign: "center",
+            overflow: "hidden",
           }}
         >
           <Box
             sx={{
-              position: 'absolute',
+              position: "absolute",
               top: 0,
               left: 0,
-              width: '100%',
-              height: '100%',
+              width: "100%",
+              height: "100%",
               zIndex: 0,
-              '&::after': {
+              "&::after": {
                 content: '""',
-                position: 'absolute',
+                position: "absolute",
                 top: 0,
                 left: 0,
-                width: '100%',
-                height: '100%',
-                backgroundColor: 'rgba(5, 15, 36, 0.7)',
-                backgroundImage: 'radial-gradient(circle at center, transparent 0%, rgba(5, 15, 36, 0.4) 100%)',
+                width: "100%",
+                height: "100%",
+                backgroundColor: "rgba(5, 15, 36, 0.7)",
+                backgroundImage:
+                  "radial-gradient(circle at center, transparent 0%, rgba(5, 15, 36, 0.4) 100%)",
               },
             }}
           >
@@ -50,66 +56,74 @@ const FAQsPage = () => {
               src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
               alt="FAQs Hero Background"
               fill
-              style={{ objectFit: 'cover', transform: 'scale(1.1)' }}
+              style={{ objectFit: "cover", transform: "scale(1.1)" }}
               priority
             />
           </Box>
-          <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
+          <Container maxWidth="md" sx={{ position: "relative", zIndex: 1 }}>
             <ScrollReveal variant="zoomIn" duration={1.5}>
-              <Typography 
-                variant="h1" 
-                sx={{ 
-                  fontSize: { xs: '3.5rem', md: '5.5rem' }, 
+              <Typography
+                variant="h1"
+                sx={{
+                  fontSize: { xs: "3.5rem", md: "5.5rem" },
                   fontWeight: 800,
-                  textShadow: '0 10px 30px rgba(0,0,0,0.5)',
-                  letterSpacing: '-0.02em',
+                  textShadow: "0 10px 30px rgba(0,0,0,0.5)",
+                  letterSpacing: "-0.02em",
                 }}
               >
                 FAQs
               </Typography>
-              <Box 
-                sx={{ 
-                  width: '80px', 
-                  height: '4px', 
-                  bgcolor: 'primary.light', 
-                  mx: 'auto', 
+              <Box
+                sx={{
+                  width: "80px",
+                  height: "4px",
+                  bgcolor: "primary.light",
+                  mx: "auto",
                   mt: 2,
-                  borderRadius: 2 
-                }} 
+                  borderRadius: 2,
+                }}
               />
             </ScrollReveal>
           </Container>
         </Box>
 
         {/* Title Section */}
-        <Box sx={{ pt: { xs: 10, md: 15 }, pb: { xs: 6, md: 8 }, textAlign: 'center' }}>
+        <Box
+          sx={{
+            pt: { xs: 10, md: 15 },
+            pb: { xs: 6, md: 8 },
+            textAlign: "center",
+          }}
+        >
           <Container maxWidth="md">
             <ScrollReveal variant="slideUp" distance={30}>
               <Typography
                 variant="h2"
                 sx={{
-                  color: 'primary.main',
+                  color: "primary.main",
                   mb: 3,
-                  fontSize: { xs: '2.5rem', md: '4rem' },
+                  fontSize: { xs: "2.5rem", md: "4rem" },
                   lineHeight: 1.1,
                   fontWeight: 800,
-                  letterSpacing: '-0.03em',
+                  letterSpacing: "-0.03em",
                 }}
               >
                 Frequently Asked Questions
               </Typography>
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  color: 'text.secondary',
-                  fontSize: '1.2rem',
-                  maxWidth: '750px',
-                  mx: 'auto',
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "text.secondary",
+                  fontSize: "1.2rem",
+                  maxWidth: "750px",
+                  mx: "auto",
                   lineHeight: 1.8,
-                  opacity: 0.8
+                  opacity: 0.8,
                 }}
               >
-                Explore answers to some of the most common questions about TND Kapital and our sharia-compliant trade solutions. We are here to help you navigate your journey.
+                Explore answers to some of the most common questions about TND
+                Kapital and our sharia-compliant trade solutions. We are here to
+                help you navigate your journey.
               </Typography>
             </ScrollReveal>
           </Container>
@@ -130,83 +144,100 @@ const FAQsPage = () => {
             <Paper
               elevation={20}
               sx={{
-                bgcolor: '#06142e',
-                borderRadius: { xs: '24px', md: '40px' },
-                overflow: 'hidden',
-                color: 'white',
-                border: '1px solid rgba(255, 255, 255, 0.05)',
-                boxShadow: '0 40px 100px rgba(6, 20, 46, 0.3)',
+                bgcolor: "#06142e",
+                borderRadius: { xs: "24px", md: "40px" },
+                overflow: "hidden",
+                color: "white",
+                border: "1px solid rgba(255, 255, 255, 0.05)",
+                boxShadow: "0 40px 100px rgba(6, 20, 46, 0.3)",
               }}
             >
               <Grid container>
-                <Grid size={{ xs: 12, md: 6 }} sx={{ p: { xs: 6, md: 12 }, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <Typography 
-                    variant="h2" 
-                    sx={{ 
-                      mb: 3, 
+                <Grid
+                  size={{ xs: 12, md: 6 }}
+                  sx={{
+                    p: { xs: 6, md: 12 },
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography
+                    variant="h2"
+                    sx={{
+                      mb: 3,
                       fontWeight: 800,
-                      fontSize: { xs: '2.5rem', md: '4rem' },
+                      fontSize: { xs: "2.5rem", md: "4rem" },
                       lineHeight: 1,
-                      letterSpacing: '-0.04em',
+                      letterSpacing: "-0.04em",
                     }}
                   >
                     Empower Your Future Today
                   </Typography>
-                  <Typography 
-                    variant="body1" 
-                    sx={{ 
-                      mb: 5, 
-                      fontSize: '1.2rem', 
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      mb: 5,
+                      fontSize: "1.2rem",
                       opacity: 0.8,
-                      maxWidth: '550px',
-                      lineHeight: 1.6
+                      maxWidth: "550px",
+                      lineHeight: 1.6,
                     }}
                   >
-                    Start your journey toward ethical, interest-free financial freedom with TND Kapital&apos;s expert guidance.
+                    Start your journey toward ethical, interest-free financial
+                    freedom with TND Kapital&apos;s expert guidance.
                   </Typography>
                   <Box>
-                    <Button 
-                      variant="contained" 
-                      sx={{ 
-                        bgcolor: 'white', 
-                        color: 'primary.main', 
-                        px: 6, 
+                    <Button
+                      variant="contained"
+                      sx={{
+                        bgcolor: "white",
+                        color: "primary.main",
+                        px: 6,
                         py: 2,
-                        borderRadius: '16px',
-                        fontSize: '1.1rem',
+                        borderRadius: "16px",
+                        fontSize: "1.1rem",
                         fontWeight: 700,
-                        textTransform: 'none',
-                        transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                        '&:hover': {
-                          bgcolor: '#f5f5f5',
-                          transform: 'translateY(-5px)',
-                          boxShadow: '0 15px 30px rgba(255, 255, 255, 0.1)',
-                        }
+                        textTransform: "none",
+                        transition:
+                          "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                        "&:hover": {
+                          bgcolor: "#f5f5f5",
+                          transform: "translateY(-5px)",
+                          boxShadow: "0 15px 30px rgba(255, 255, 255, 0.1)",
+                        },
                       }}
                     >
                       Get Started!
                     </Button>
                   </Box>
                 </Grid>
-                <Grid size={{ xs: 12, md: 6 }} sx={{ position: 'relative', height: { xs: '300px', md: 'auto' }, minHeight: { md: '600px' } }}>
+                <Grid
+                  size={{ xs: 12, md: 6 }}
+                  sx={{
+                    position: "relative",
+                    height: { xs: "300px", md: "auto" },
+                    minHeight: { md: "600px" },
+                  }}
+                >
                   <Image
                     src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop"
                     alt="Empower Your Future"
                     fill
-                    style={{ objectFit: 'cover' }}
+                    style={{ objectFit: "cover" }}
                   />
-                  <Box 
-                    sx={{ 
-                      position: 'absolute', 
-                      top: 0, 
-                      left: 0, 
-                      width: '100%', 
-                      height: '100%', 
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
                       background: {
-                        xs: 'linear-gradient(to bottom, #06142e 0%, transparent 30%)',
-                        md: 'linear-gradient(to right, #06142e 0%, transparent 30%)'
-                      }
-                    }} 
+                        xs: "linear-gradient(to bottom, #06142e 0%, transparent 30%)",
+                        md: "linear-gradient(to right, #06142e 0%, transparent 30%)",
+                      },
+                    }}
                   />
                 </Grid>
               </Grid>
@@ -214,7 +245,6 @@ const FAQsPage = () => {
           </ScrollReveal>
         </Container>
       </main>
-      <Footer />
     </Box>
   );
 };

@@ -51,7 +51,7 @@ const Products = () => {
       sx={{
         py: { xs: 10, md: 15 },
         bgcolor: "#f8f9fa",
-        maxWidth: "1500px",
+        // maxWidth: "1500px",
         width: "100%",
         margin: "0 auto",
         position: "relative",
@@ -85,7 +85,7 @@ const Products = () => {
         }}
       />
 
-      <Container maxWidth={false} sx={{ position: "relative", zIndex: 1, px: { xs: 2, md: 4 } }}>
+      <Container maxWidth="xl"  sx={{ position: "relative", zIndex: 1, px: { xs: 2, md: 4 } }}>
         <Box sx={{ textAlign: "center", mb: 8, maxWidth: 900, mx: "auto" }}>
           <ScrollReveal variant="fadeUp" duration={0.6}>
             <Typography

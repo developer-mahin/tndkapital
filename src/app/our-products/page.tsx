@@ -1,18 +1,23 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Box, Container, Typography, Grid, Button, Stack, Divider, Paper } from '@mui/material';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import ScrollReveal from '@/components/ScrollReveal';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
-import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
-import LanguageIcon from '@mui/icons-material/Language';
-import GroupIcon from '@mui/icons-material/Group';
-import HandshakeIcon from '@mui/icons-material/Handshake';
-
+import ScrollReveal from "@/components/ScrollReveal";
+import GroupIcon from "@mui/icons-material/Group";
+import HandshakeIcon from "@mui/icons-material/Handshake";
+import LanguageIcon from "@mui/icons-material/Language";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 
 const OurProducts = () => {
   return (
@@ -24,7 +29,6 @@ const OurProducts = () => {
         bgcolor: "white",
       }}
     >
-      <Navbar />
       <main style={{ flexGrow: 1 }}>
         {/* Hero Section */}
         <Box
@@ -49,7 +53,7 @@ const OurProducts = () => {
             }}
           >
             <Image
-              src="/images/products-hero.png"
+              src="/images/image10.jpg"
               alt="Community interaction"
               fill
               style={{ objectFit: "cover" }}
@@ -110,7 +114,7 @@ const OurProducts = () => {
                   }}
                 >
                   <Image
-                    src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800"
+                    src="/images/Co-op-Soap.png"
                     alt="Enterprise Soap Models"
                     fill
                     style={{ objectFit: "cover" }}
@@ -159,7 +163,7 @@ const OurProducts = () => {
                     or building a more stable future — our offerings are rooted
                     in transparency, dignity, and purpose.
                   </Typography>
-                  <Link href="/contact-us" style={{ textDecoration: 'none' }}>
+                  <Link href="/contact-us" style={{ textDecoration: "none" }}>
                     <Button
                       variant="contained"
                       color="primary"
@@ -169,11 +173,12 @@ const OurProducts = () => {
                         py: 1.5,
                         borderRadius: 2,
                         bgcolor: "primary.main",
-                        transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                        transition:
+                          "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                         "&:hover": {
                           transform: "translateY(-4px)",
                           boxShadow: "0 8px 20px rgba(13, 36, 77, 0.3)",
-                        }
+                        },
                       }}
                     >
                       Get Started
@@ -236,26 +241,31 @@ const OurProducts = () => {
                     <Stack spacing={4}>
                       {[
                         {
-                          title: "Access What You Need — Without Interest or Debt",
-                          desc: "Personalized, interest-free purchasing programs grounded in Islamic principles — helping you grow with dignity, clarity, and purpose. Every offering is reviewed and approved by an independent Sharia Supervisory Board (SSB) to ensure full alignment with ethical standards every step of the way."
+                          title:
+                            "Access What You Need — Without Interest or Debt",
+                          desc: "Personalized, interest-free purchasing programs grounded in Islamic principles — helping you grow with dignity, clarity, and purpose. Every offering is reviewed and approved by an independent Sharia Supervisory Board (SSB) to ensure full alignment with ethical standards every step of the way.",
                         },
                         {
                           title: "Cost Plus Profit (CPP)",
-                          desc: "Buy what you need today — with full transparency and no interest. A Sharia-compliant plan where we buy the goods you need and sell them to you at a pre-agreed profit, repayable in installments. Applicable for Personal (Household items) or Business (Products or Tools)."
+                          desc: "Buy what you need today — with full transparency and no interest. A Sharia-compliant plan where we buy the goods you need and sell them to you at a pre-agreed profit, repayable in installments. Applicable for Personal (Household items) or Business (Products or Tools).",
                         },
                         {
                           title: "Thrive Together Partnership (TTP)",
-                          desc: "You bring the skills. We bring the resources. We grow together. A trust-based partnership built on Islamic values. TND Kapital provides the goods or materials your venture needs, and you manage the business. We grow and share in the profit — no pressure."
+                          desc: "You bring the skills. We bring the resources. We grow together. A trust-based partnership built on Islamic values. TND Kapital provides the goods or materials your venture needs, and you manage the business. We grow and share in the profit — no pressure.",
                         },
                         {
                           title: "Group Empowerment Program (GEP)",
-                          desc: "Strong alone. Stronger together. Our community-centered Outreach Program is designed specifically for groups or co-ops. Members support each other's success through trust, shared responsibility, and collective empowerment."
-                        }
+                          desc: "Strong alone. Stronger together. Our community-centered Outreach Program is designed specifically for groups or co-ops. Members support each other's success through trust, shared responsibility, and collective empowerment.",
+                        },
                       ].map((item, idx) => (
                         <Box key={idx}>
                           <Typography
                             variant="h6"
-                            sx={{ color: "primary.main", fontWeight: 700, mb: 1 }}
+                            sx={{
+                              color: "primary.main",
+                              fontWeight: 700,
+                              mb: 1,
+                            }}
                           >
                             {item.title}
                           </Typography>
@@ -286,7 +296,7 @@ const OurProducts = () => {
                       }}
                     >
                       <Image
-                        src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=800"
+                        src="/images/image5.jpg"
                         alt="Woman on laptop"
                         fill
                         style={{ objectFit: "cover" }}
@@ -369,7 +379,7 @@ const OurProducts = () => {
                   programs rooted in Islamic principles — so you can access what
                   you need without hidden costs or financial pressure.
                 </Typography>
-                <Link href="/about-us" style={{ textDecoration: 'none' }}>
+                <Link href="/about-us" style={{ textDecoration: "none" }}>
                   <Button
                     variant="contained"
                     color="primary"
@@ -378,10 +388,11 @@ const OurProducts = () => {
                       py: 1.5,
                       borderRadius: 2,
                       bgcolor: "primary.main",
-                      transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                      transition:
+                        "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                       "&:hover": {
                         transform: "translateY(-4px)",
-                      }
+                      },
                     }}
                   >
                     Learn More
@@ -435,30 +446,35 @@ const OurProducts = () => {
                         "We don't just provide solutions — we walk with you. Whether you're starting a business, securing a household item, or planning ahead, we're here for the long term.",
                     },
                   ].map((feature, index) => (
-                    <Grid size={{ xs: 12, sm: 6 }} key={index} component={motion.div} variants={{
-                      hidden: { opacity: 0, y: 20 },
-                      visible: { opacity: 1, y: 0 }
-                    }}>
-                        <Box sx={{ p: 2 }}>
-                          <Box sx={{ mb: 2 }}>{feature.icon}</Box>
-                          <Typography
-                            variant="h6"
-                            sx={{
-                              color: "primary.main",
-                              fontWeight: 700,
-                              mb: 1,
-                              fontSize: "1.1rem",
-                            }}
-                          >
-                            {feature.title}
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            sx={{ color: "text.secondary", lineHeight: 1.6 }}
-                          >
-                            {feature.description}
-                          </Typography>
-                        </Box>
+                    <Grid
+                      size={{ xs: 12, sm: 6 }}
+                      key={index}
+                      component={motion.div}
+                      variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: { opacity: 1, y: 0 },
+                      }}
+                    >
+                      <Box sx={{ p: 2 }}>
+                        <Box sx={{ mb: 2 }}>{feature.icon}</Box>
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            color: "primary.main",
+                            fontWeight: 700,
+                            mb: 1,
+                            fontSize: "1.1rem",
+                          }}
+                        >
+                          {feature.title}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{ color: "text.secondary", lineHeight: 1.6 }}
+                        >
+                          {feature.description}
+                        </Typography>
+                      </Box>
                     </Grid>
                   ))}
                 </Grid>
@@ -488,7 +504,7 @@ const OurProducts = () => {
             }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200"
+              src="/images/businesswoman-analyzing-finance-on-tablet-and-laptop-at-modern-office-desk-tax-report.jpg"
               alt="Community future"
               fill
               style={{ objectFit: "cover" }}
@@ -500,7 +516,7 @@ const OurProducts = () => {
                 left: 0,
                 width: "100%",
                 height: "100%",
-                bgcolor: "rgba(13, 36, 77, 0.85)",
+                bgcolor: "rgba(13, 36, 77, 0.72)",
               }}
             />
           </Box>
@@ -529,7 +545,7 @@ const OurProducts = () => {
                 ...increasing access & opportunity — guided by transparency and
                 timeless values.
               </Typography>
-              <Link href="/contact-us" style={{ textDecoration: 'none' }}>
+              <Link href="/contact-us" style={{ textDecoration: "none" }}>
                 <Button
                   variant="contained"
                   color="secondary"
@@ -555,7 +571,6 @@ const OurProducts = () => {
           </Container>
         </Box>
       </main>
-      <Footer />
     </Box>
   );
 };

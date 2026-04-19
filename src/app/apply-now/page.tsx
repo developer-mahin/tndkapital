@@ -147,12 +147,14 @@ const ApplyNow = () => {
         setSubmitted(true);
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Error submitting form:", error);
       setSnackbar({
         open: true,
-        message: error.response?.data?.message || "Something went wrong. Please try again.",
+        message:
+          error.response?.data?.message ||
+          "Something went wrong. Please try again.",
         severity: "error",
       });
     } finally {
@@ -169,7 +171,6 @@ const ApplyNow = () => {
       <Box
         sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
       >
-        <Navbar />
         <Container
           maxWidth="md"
           sx={{ py: 20, flexGrow: 1, textAlign: "center" }}
@@ -254,8 +255,8 @@ const ApplyNow = () => {
           </ScrollReveal>
 
           <ScrollReveal variant="slideUp" distance={40} delay={0.2}>
-            <Box 
-              component="form" 
+            <Box
+              component="form"
               onSubmit={handleSubmit}
               sx={{
                 p: { xs: 3, md: 6 },
@@ -408,7 +409,10 @@ const ApplyNow = () => {
                       sx={inputStyles}
                       value={formData.homeAddress}
                       onChange={(e) =>
-                        setFormData({ ...formData, homeAddress: e.target.value })
+                        setFormData({
+                          ...formData,
+                          homeAddress: e.target.value,
+                        })
                       }
                     />
                   </Grid>
@@ -561,7 +565,8 @@ const ApplyNow = () => {
                       fontSize: "1.1rem",
                       fontWeight: 700,
                       borderRadius: 2,
-                      transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                      transition:
+                        "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                       "&:hover": {
                         bgcolor: "primary.dark",
                         transform: "translateY(-4px)",
@@ -573,7 +578,9 @@ const ApplyNow = () => {
                       mt: 2,
                     }}
                   >
-                    {loading ? "Submitting Application..." : "Submit Application"}
+                    {loading
+                      ? "Submitting Application..."
+                      : "Submit Application"}
                   </Button>
                 </Grid>
               </Grid>
@@ -581,7 +588,6 @@ const ApplyNow = () => {
           </ScrollReveal>
         </Container>
       </main>
-      <Footer />
     </Box>
   );
 };

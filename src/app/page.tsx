@@ -1,9 +1,6 @@
-
-import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import HeroBottom from "@/components/HeroBottom";
 import JoinUs from "@/components/JoinUs";
-import Navbar from "@/components/Navbar";
 import Products from "@/components/Products";
 import Promise from "@/components/Promise";
 import Testimonials from "@/components/Testimonials";
@@ -16,12 +13,11 @@ import ScrollReveal from "@/components/ScrollReveal";
 export default function Home() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <Navbar />
       <main style={{ flexGrow: 1 }}>
         <ScrollReveal variant="fade" duration={1.2}>
           <Hero />
         </ScrollReveal>
-        
+
         <ScrollReveal variant="fadeUp" distance={20} delay={0.2}>
           <HeroBottom />
         </ScrollReveal>
@@ -50,7 +46,6 @@ export default function Home() {
           <JoinUs />
         </ScrollReveal>
       </main>
-      <Footer />
     </Box>
   );
 }

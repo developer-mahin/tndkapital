@@ -1,3 +1,5 @@
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -10,7 +12,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "TND Kapital - Rooted in Values. Built for People",
-  description: "Empowering Lives Through Ethical Business Solutions. Fair & Transparent- For Everyday People.",
+  description:
+    "Empowering Lives Through Ethical Business Solutions. Fair & Transparent- For Everyday People.",
 };
 
 export default function RootLayout({
@@ -21,7 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Navbar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

@@ -50,7 +50,7 @@ const Navbar = () => {
     >
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
         <Image
-          src="https://tndkapital.com/wp-content/uploads/2025/05/Untitled-design-70.png"
+          src="/logo.png"
           alt="TND Kapital Logo"
           width={250}
           height={120}
