@@ -18,9 +18,18 @@ export default function Home() {
           <Hero />
         </ScrollReveal>
 
-        <ScrollReveal variant="fadeUp" distance={20} delay={0.2}>
-          <HeroBottom />
-        </ScrollReveal>
+        <Box
+          sx={{
+            display: {
+              xs: "none",
+              md: "block",
+            },
+          }}
+        >
+          <ScrollReveal variant="fadeUp" distance={20} delay={0.2}>
+            <HeroBottom />
+          </ScrollReveal>
+        </Box>
 
         <ScrollReveal variant="fadeUp">
           <WhoWeAre />
