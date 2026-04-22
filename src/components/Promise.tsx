@@ -60,7 +60,7 @@ const Promise = () => {
     <Box
       id="promise"
       sx={{
-        py: { xs: 10, md: 15 },
+        py: { xs: 5, md: 15 },
         bgcolor: "#fff",
         position: "relative",
         overflow: "hidden",

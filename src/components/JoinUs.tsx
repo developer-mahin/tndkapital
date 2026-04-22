@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const JoinUs = () => {
   return (
-    <Container maxWidth="lg" sx={{ mb: 10 }}>
+    <Container maxWidth="lg" sx={{ mb: { xs: 4, md: 10 } }}>
       <Box
         sx={{
           bgcolor: "#071529",
@@ -21,7 +21,7 @@ const JoinUs = () => {
           <Grid size={{ xs: 12, md: 7 }}>
             <Box
               sx={{
-                p: { xs: 6, md: 6 },
+                p: { xs: 3, md: 6 },
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",

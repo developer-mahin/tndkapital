@@ -42,8 +42,8 @@ const Navbar = () => {
       sx={{
         width: 250,
         height: '100%',
-        bgcolor: 'primary.main',
-        color: 'white',
+        // bgcolor: 'primary.main',
+        // color: 'white',
         pt: 4,
       }}
       onClick={handleDrawerToggle}
@@ -59,7 +59,7 @@ const Navbar = () => {
       </Box>
       <List>
         {navItems.map((item) => (
-          <ListItem key={item.label} component={Link} href={item.href} sx={{ color: 'white' }}>
+          <ListItem key={item.label} component={Link} href={item.href} >
             <ListItemText primary={item.label} primaryTypographyProps={{ fontWeight: 500 }} />
           </ListItem>
         ))}

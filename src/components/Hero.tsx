@@ -41,7 +41,7 @@ const Hero = () => {
     <Box
       sx={{
         position: "relative",
-        height: "80vh",
+        height: { xs: "60vh", md: "80vh" },
         width: "100%",
         overflow: "hidden",
         bgcolor: "#000",
@@ -98,7 +98,7 @@ const Hero = () => {
         <Stack
           justifyContent="center"
           sx={{ height: "100%", maxWidth: 800 }}
-          spacing={2}
+          spacing={{xs: 1, md: 2}}
         >
           <motion.div
             initial="hidden"
@@ -144,7 +144,7 @@ const Hero = () => {
                 variant="h1"
                 sx={{
                   color: "white",
-                  fontSize: { xs: "2.5rem", md: "4.5rem" },
+                  fontSize: { xs: "1.5rem", md: "4.5rem" },
                   fontWeight: 800,
                   lineHeight: 1.1,
                   mb: 2,
@@ -165,7 +165,7 @@ const Hero = () => {
                 variant="h5"
                 sx={{
                   color: "white",
-                  fontSize: { xs: "1.1rem", md: "1.4rem" },
+                  fontSize: { xs: "0.8rem", md: "1.4rem" },
                   fontWeight: 400,
                   mb: 4,
                   opacity: 0.9,
@@ -193,10 +193,10 @@ const Hero = () => {
                   bgcolor: "#d2aa51",
                   color: "white",
                   fontWeight: 700,
-                  px: 5,
-                  py: 2,
+                  px: {xs: 2, md: 5},
+                  py: { xs: 1, md: 2 },
                   borderRadius: 8,
-                  fontSize: "1.1rem",
+                  fontSize: {xs:"0.8rem" , md:"1.1rem"},
                   textTransform: "none",
                   boxShadow: "0 4px 15px rgba(210, 170, 81, 0.4)",
                   "&:hover": {

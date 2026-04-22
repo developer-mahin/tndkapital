@@ -69,7 +69,7 @@ const Testimonials = () => {
   const current = testimonialData[index];
 
   return (
-    <Box sx={{ py: { xs: 10, md: 15 }, bgcolor: "#fff", overflow: "hidden" }}>
+    <Box sx={{ py: { xs: 5, md: 15 }, bgcolor: "#fff", overflow: "hidden" }}>
       <Container maxWidth="lg">
         <Grid container spacing={8} alignItems="center">
           {/* Left Side: Content */}
